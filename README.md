@@ -11,9 +11,9 @@
 
 
 ## MOCK-UP
+(https://whimsical.com/7ptF5aW1CDkJhALvKSAjp3)
 
-[MOCK-UP](https://whimsical.com/7ptF5aW1CDkJhALvKSAjp3)
-
+[https://whimsical.com/7ptF5aW1CDkJhALvKSAjp3](https://whimsical.com/7ptF5aW1CDkJhALvKSAjp3)
 
 ## **To do List**
 
