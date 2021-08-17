@@ -9,12 +9,12 @@
 - Javascript
 - React.js (Functional Components + Hook)
 
-# 
+
+## MOCK-UP
 
 [MOCK-UP](https://whimsical.com/7ptF5aW1CDkJhALvKSAjp3)
 
 
-### 라이브러리
 ## **To do List**
 
 ### **로그인**
