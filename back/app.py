@@ -22,12 +22,6 @@ def create_app():
     @app.route('/register')
     def index():
 
-        user1 = User("a@elice.io", "1234", "racer1")
-        db.session.add(user1)
-        user2 = User("b@elice.io", "1234", "racer2")
-        db.session.add(user2)
-        user3 = User("c@elice.io", "1234", "racer3")
-        db.session.add(user3)
 
         db.session.commit()
 
