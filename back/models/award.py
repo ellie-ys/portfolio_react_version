@@ -1,6 +1,6 @@
 from db_connect import db
 
-class Award(db.Model):
+class award(db.Model):
 
     __tablename__ = 'award'
 

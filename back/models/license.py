@@ -1,6 +1,6 @@
 from db_connect import db
 
-class License(db.Model):
+class license(db.Model):
 
     __tablename__ = 'license'
     

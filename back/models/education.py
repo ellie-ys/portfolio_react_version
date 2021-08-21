@@ -1,7 +1,7 @@
 from db_connect import db
 
 
-class Education(db.Model):
+class education(db.Model):
 
     __tablename__ = 'education'
 

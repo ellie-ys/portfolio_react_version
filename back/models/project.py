@@ -1,7 +1,7 @@
 from db_connect import db
 
 
-class Project(db.Model):
+class project(db.Model):
 
     __tablename__ = 'project'
 
