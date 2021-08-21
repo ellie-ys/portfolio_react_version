@@ -1,0 +1,42 @@
+{% block page_content %}
+<form action="{{ url_for('register.registers') }}" method="post">
+  <div class="form-group">
+    <label for="input_email">이메일</label>
+    <input
+      class="form-control"
+      type="text"
+      name="input_email"
+      id="input_email"
+      placeholder="이메일"
+    />
+  </div>
+  <div class="form-group">
+    <label for="input_pw">비밀번호</label>
+    <input
+      class="form-control"
+      name="input_pw"
+      type="input_pw"
+      placeholder="비밀번호"
+    />
+  </div>
+  <div class="form-group">
+    <label for="verify_pw">비밀번호 확인</label>
+    <input
+      class="form-control"
+      name="verify_pw"
+      type="verify_pw"
+      placeholder="비밀번호 확인"
+    />
+  </div>
+  <div class="form-group">
+    <label for="input_name">이름</label>
+    <input
+      class="form-control"
+      name="input_name"
+      type="input_name"
+      placeholder="이름"
+    />
+  </div>
+  <input class="btn btn-primary" type="submit" value="회원가입!" />
+</form>
+{% endblock %}

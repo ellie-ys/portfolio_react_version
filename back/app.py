@@ -1,31 +1,24 @@
-
-from flask import Flask, Blueprint
+from flask import Flask, Blueprint, redirect, request
+from flask_sqlalchemy import SQLAlchemy
 from db_connect import db
 import config
+import requests
+from flask_cors import CORS
 from admin import admin_password
-from models.user import User
-
+from templates import *
 
 def create_app():
     app = Flask(__name__)
+    CORS(app)
     app.config.from_object(config) 
 
+    db = SQLAlchemy(app)
     db.init_app(app)
 
 
-    @app.route("/api")
-    def info():
-        
-        return "Hello World!"
+    from apis import main_view
 
-
-    @app.route('/register')
-    def index():
-
-
-        db.session.commit()
-
-        return "SUCCESS"
+    app.register_blueprint(main_view.bp)
 
     app.secret_key = admin_password
     app.config['SESSION_TYPE'] = 'filesystem'

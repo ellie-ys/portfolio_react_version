@@ -1,0 +1,47 @@
+{% block page_content %} {% if elice_info %}
+<table class="table table-hover table-condensed table-bordered">
+  <tbody>
+    <tr>
+      <th>레이서</th>
+      <th>{{ elice_info.name }}</th>
+      <th>{{ elice_info.description }}</th>
+      <th>{{ elice_info.image }}</th>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <th>학력</th>
+      <th>{{ elice_education.school }}</th>
+      <th>{{ elice_education.major }}</th>
+      <th>{{ elice_education.degree }}</th>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <th>수상이력</th>
+      <th>{{ elice_award.name }}</th>
+      <th>{{ elice_award.description }}</th>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <th>프로젝트</th>
+      <th>{{ elice_project.name }}</th>
+      <th>{{ elice_project.description }}</th>
+      <th>{{ elice_project.startdate }}</th>
+      <th>{{ elice_project.enddate }}</th>
+      <th>{{ elice_project.url }}</th>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <th>자격증</th>
+      <th>{{ elice_license.name }}</th>
+      <th>{{ elice_license.agency }}</th>
+      <th>{{ elice_license.date }}</th>
+    </tr>
+  </tbody>
+</table>
+<hr />
+
+{% endif %} {% endblock %}

@@ -1,0 +1,8 @@
+<ul class="list-group">
+  {% for elicer in elicer_list%}
+  <a href="/elicer/{{ elicer.id }}">
+    <li class="list-group-item list-group-item-action">{{ elicer.name }}</li></a
+  >
+</ul>
+
+{% endfor %}
