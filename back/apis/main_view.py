@@ -7,30 +7,48 @@ from models.education import *
 from models.license import *
 from models.project import *
 from templates import *
-import requests 
+
 from werkzeug.security import check_password_hash, generate_password_hash
 
-bp = Blueprint('main_view', __name__, url_prefix='/')
-bp = Blueprint('login', __name__, url_prefix='/')
-bp = Blueprint('register', __name__, url_prefix='/')
+bp = Blueprint('main', __name__, url_prefix='/')
+# bp = Blueprint('login', __name__, url_prefix='/')
+# bp = Blueprint('register', __name__, url_prefix='/')
 
 
-#메인페이지 , 네트워크
+#마이페이지, 수정하기
+@bp.route("/mypage")
+def mypage():
+    if request.method == 'GET':
+        info = db.session.query(user).all()
+        result = []
+        for i in info:
+            user_info= {
+                'email':i.email,
+                'name':i.name,
+                'description':i.description,
+                'image':i.image
+            }
+            result.append(user_info)
+
+        return jsonify(result)
+
+    elif request.method == 'POST':
+        info = request.get_json()
+        user.append(info)
+        users = user(info['input_email'],info['input_name'],info['input_pw'],info['verify_pw'],info['input_description'],info['input_image'])
+        db.session.add(users)
+        db.session.commit()
+        return jsonify(status="success")
+
 @bp.route("/")
 def home():
     elicer_list = user.query.order_by(user.name.asc())
     return render_template('elicer.html', elicer_list = elicer_list)
 
 
-@bp.route('/elicer')
-def elice():
-    elicer_list = user.query.order_by(user.name.asc())
-    return render_template('elicer.html', elicer_list = elicer_list)
-
-
 #회원가입
 @bp.route('/register', methods=['GET', 'POST'])
-def registers():
+def register():
     if request.method == 'GET':
         return render_template('register.html')
     else:
@@ -64,7 +82,7 @@ def registers():
 
 #로그인
 @bp.route("/login", methods=["GET", "POST"])
-def logins():
+def login():
     if request.method == 'GET':
         return render_template("login.html")
     else: 
@@ -77,18 +95,30 @@ def logins():
         return redirect('/login')
     if not check_password_hash(user_data.password, password):
         flash("비밀번호가 일치하지 않습니다.")
-        return redirect(url_for('register.logins'))
+        return redirect(url_for('main.login'))
 
     session.clear()
     session['email'] = user_data.email
     session['name'] = user_data.name
     flash(f"안녕하세요, {user_data.name}님!")
-    return redirect("/mypage")
+    return redirect("/elicer")
 
 
+#로그아웃
+@bp.route('/logout')
+def logout():
+    name = session['name']
+    session.clear()
+    flash(f"안녕히가세요, {name}님")
+    return redirect()
 
+#메인페이지
+@bp.route('/elicer')
+def elicer():
+    elicer_list = user.query.order_by(user.name.asc())
+    return render_template('elicer.html', elicer_list = elicer_list)
 
-#메인페이지, 유저정보보기, 내 페이지 수정하기
+#유저정보보기, 내 페이지 수정하기
 @bp.route('/elicer/<int:elice_id>/')
 def elicer_detail(elice_id):
     elice_info = user.query.filter(user.id == elice_id).first()
@@ -97,3 +127,4 @@ def elicer_detail(elice_id):
     elice_project = project.query.filter(project.user_id == elice_id).first()
     elice_license = license.query.filter(license.user_id == elice_id).first()
     return render_template('elicer_detail.html', elice_info = elice_info, elice_education = elice_education, elice_project= elice_project, elice_license=elice_license, elice_award=elice_award)
+
