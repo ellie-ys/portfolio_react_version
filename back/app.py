@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, redirect, request
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from db_connect import db
 import config
@@ -10,6 +10,7 @@ from templates import *
 def create_app():
     app = Flask(__name__)
     CORS(app)
+
     app.config.from_object(config) 
 
     db = SQLAlchemy(app)
@@ -27,4 +28,4 @@ def create_app():
 
 
 if __name__ == "__main__":
-    create_app().run(debug=True)
+    create_app().run(debug=True, port = 5000)
