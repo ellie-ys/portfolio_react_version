@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 
-import Header from "../Components/Header";
-import MainForm from "../Components/MainForm";
+import Header from "../components/Header";
+import MainForm from "../components/MainForm";
 
 
 function Main () {

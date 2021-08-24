@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 
-import Header from "../Components/Header";
-import NetworkForm from "../Components/NetworkForm";
+import Header from "../components/Header";
+import NetworkForm from "../components/NetworkForm";
 
 function Network() {
   return (
