@@ -1,6 +1,16 @@
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router";
+import styled from "styled-components";
 import axios from "axios";
+
+const MainPage = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+  width: 296px;
+  height: 407px;
+`;
 
 const RegisterForm = () => {
   const [email, setEmail] = useState("");
@@ -9,27 +19,34 @@ const RegisterForm = () => {
   const [name, setName] = useState("");
   const history = useHistory();
 
-  const registerRequest = async () => {
-    try {
-      await axios.post(`http://127.0.0.1:5000/register`, {
-        email,
-        password,
-        name,
-      });
-      history.push("/register");
-    } catch (e) {
-      alert(e.response.data.message);
-    }
+  const registerRequest = async (email, password, name) => {
+    await axios.post(`http://127.0.0.1:5000/register`, {
+      email,
+      password,
+      name,
+    });
   };
 
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
-    registerRequest();
+    (async () => {
+      try {
+        await registerRequest(email, password, name);
+        alert("회원가입되었습니다. 로그인 화면으로 이동합니다.");
+        history.push("/");
+      } catch (e) {
+        alert("다시 시도해주세요");
+        history.push("/register");
+      }
+    })();
   };
+
   return (
-    <div>
+    <MainPage>
       <form onSubmit={handleRegisterSubmit}>
         <div>
+          <h2>Register Page</h2>
+
           <label htmlFor="email">이메일</label>
           <input
             type="text"
@@ -77,10 +94,10 @@ const RegisterForm = () => {
         <button type="submit">회원가입</button>
 
         <button type="button" onClick={() => history.push("/")}>
-          구글계정으로 로그인하기
+          로그인 페이지
         </button>
       </form>
-    </div>
+    </MainPage>
   );
 };
 

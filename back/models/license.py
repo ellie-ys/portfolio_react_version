@@ -1,6 +1,6 @@
 from db_connect import db
 
-class license(db.Model):
+class License(db.Model):
 
     __tablename__ = 'license'
     
@@ -8,9 +8,19 @@ class license(db.Model):
     name = db.Column(db.String(255), nullable = False)
     agency = db.Column(db.String(20))
     date = db.Column(db.String(255))
-    user_id = db.Column(db.Integer, db.ForeignKey('User.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE", onupdate="CASCADE"), nullable=False)
 
-    def __init__(self, name, agency, date):
+    def __init__(self, name, agency, date, user_id):
         self.name = name
         self.agency = agency
         self.date = date
+        self.user_id = user_id
+
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "agency": self.organiagencyzation,
+            "date": self.date.strftime("%Y-%m-%d"),
+        }

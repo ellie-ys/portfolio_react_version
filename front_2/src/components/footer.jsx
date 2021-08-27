@@ -2,10 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const ContainerFooter = styled.div`
-  letter-spacing: -0.01em;
+  width: 100%;
+  text-align: center;
   display: flex;
   align-items: center;
-  color: #292b2c;
+  color: #000000;
   box-sizing: border-box;
   justify-content: center;
 `;
@@ -13,7 +14,9 @@ const ContainerFooter = styled.div`
 function Footer() {
   return (
     <ContainerFooter>
-      <p className="title">Elice </p>
+      <p className="footer">
+        Copyright ⓒ 2016 - 2021 elice. All rights reserved
+      </p>
     </ContainerFooter>
   );
 }
