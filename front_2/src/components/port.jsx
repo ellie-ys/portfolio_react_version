@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useHistory, Redirect } from "react-router-dom";
+import React from "react";
 import axios from "axios";
 
 const Portfolio = () => {
   async function getUserInfo(e) {
     e.preventDefault();
-    const response = await axios.get(`http://127.0.0.1:5000/elicer/${userId}`);
-    if (response.data.result === "success") userId = response.data.data;
-    return userId;
+    const response = await axios.get(`http://127.0.0.1:5000/elicer/${user}`);
+    if (response.data.result === "success") user = response.data.data;
+    return user;
   }
-
   return (
-    <div data-id={userId.id}>
+    <div data-id={user.id}>
       <div>
-        <span>{userId.name}</span>
-        <p>{userId.description ? userId.description : "한 줄 소개"}</p>
+        <span>{user.name}</span>
+        <p>{user.description ? user.description : "한 줄 소개"}</p>
       </div>
     </div>
   );
