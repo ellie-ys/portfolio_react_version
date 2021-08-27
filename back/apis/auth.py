@@ -47,7 +47,7 @@ def register():
     if user is not None:
         return jsonify(result="failed", message="이미 가입된 이메일입니다."), 400
 
-    hash_pw = generate_password_hash(password).decode("utf-8")
+    hash_pw = generate_password_hash(password)
 
     new_user = User(email, hash_pw, name)
     db.session.add(new_user)
