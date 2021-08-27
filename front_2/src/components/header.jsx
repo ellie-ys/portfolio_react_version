@@ -4,17 +4,35 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const HeaderContainer = styled.div`
-  letter-spacing: 0.01em;
   width: 100%;
-  height: 60px;
+  height: 80px;
   padding: 0 20px;
   display: flex;
+  font-size: 1.1rem;
   align-items: center;
-  justify-content: space-between;
-  background-color: #dabff3;
   box-sizing: border-box;
+  padding: 0 50px;
+  justify-content: space-between;
+  background-color: #a593e0;
+  box-sizing: border-box;
+  color: #eeeeee;
+  font-size: 189%;
+
+  ul {
+    display: flex;
+  }
+
   li {
     cursor: pointer;
+    transition: all 100ms ease-in-out 0ms;
+  }
+
+  li:hover {
+    transform: scale(1.1);
+  }
+
+  li + li {
+    margin-left: 20px;
   }
 `;
 

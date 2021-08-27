@@ -3,13 +3,35 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 import axios from "axios";
 
-const MainPage = styled.div`
+const Title = styled.div`
+  font-size: 300%;
+`;
+const DivForm = styled.div`
+  width: 100%;
+  height: 2000px;
+  background-color: #f7f9ff;
+  box-sizing: border-box;
+  padding-top: 25vh;
+  font-size: 189%;
+`;
+const Hh2 = styled.div`
+  width: 500px;
+  height: 800px;
+`;
+const SeconForm = styled.form`
   display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  height: 100vh;
-  justify-content: center;
-  width: 296px;
-  height: 407px;
+  padding: 40px 40px 200px 60px;
+  background-color: #f7f9ff;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+`;
+const InputForm = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const RegisterForm = () => {
@@ -42,62 +64,80 @@ const RegisterForm = () => {
   };
 
   return (
-    <MainPage>
-      <form onSubmit={handleRegisterSubmit}>
-        <div>
-          <h2>Register Page</h2>
-
-          <label htmlFor="email">이메일</label>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            placeholder="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">비밀번호</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password2">비밀번호 확인</label>
-          <input
-            type="password"
-            id="password2"
-            name="password2"
-            placeholder="password"
-            value={password2}
-            onChange={(e) => setPassword2(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="name">이름</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-
-        <button type="submit">회원가입</button>
-
-        <button type="button" onClick={() => history.push("/")}>
-          로그인 페이지
-        </button>
-      </form>
-    </MainPage>
+    <>
+      <DivForm>
+        <SeconForm>
+          <Hh2>
+            <Title>Sign up</Title>
+            <br />
+            <form onSubmit={handleRegisterSubmit}>
+              <div>
+                <InputForm>
+                  <label htmlFor="email">이메일</label>
+                  <input
+                    type="text"
+                    id="email"
+                    name="email"
+                    placeholder="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </InputForm>
+              </div>
+              <div>
+                <InputForm>
+                  <label htmlFor="password">비밀번호</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </InputForm>
+              </div>
+              <div>
+                <InputForm>
+                  <label htmlFor="password2">비밀번호 확인</label>
+                  <input
+                    type="password"
+                    id="password2"
+                    name="password2"
+                    placeholder="password"
+                    value={password2}
+                    onChange={(e) => setPassword2(e.target.value)}
+                  />
+                </InputForm>
+              </div>
+              <div>
+                <InputForm>
+                  <label htmlFor="name">이름</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </InputForm>
+              </div>
+              <div>
+                <InputForm>
+                  <button type="submit">회원가입</button>
+                </InputForm>
+                <InputForm>
+                  <button type="button" onClick={() => history.push("/")}>
+                    로그인 페이지
+                  </button>
+                </InputForm>
+              </div>
+            </form>
+          </Hh2>
+        </SeconForm>
+      </DivForm>
+    </>
   );
 };
 
