@@ -33,13 +33,14 @@ const InputForm = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let history = useHistory();
-  async function loginRequest(e) {
+  async function loginPost(e) {
     e.preventDefault();
-    const response = await axios.post(`http://127.0.0.1:5000/login`, {
+    const response = await axios.post(`http://kdt-1st-project-77.koreacentral.cloudapp.azure.com/login`, {
       email,
       password,
     });
@@ -55,7 +56,7 @@ const LoginForm = () => {
           <Hh2>
             <Title>Login</Title>
             <br />
-            <form onSubmit={(e) => loginRequest(e)}>
+            <form onSubmit={(e) => loginPost(e)}>
               <div>
                 <InputForm>
                   <label htmlFor="email">이메일</label>

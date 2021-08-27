@@ -42,7 +42,9 @@ export default function Header() {
   const handleLogoutButton = async () => {
     try {
       if (window.confirm("로그아웃하시겠습니까?")) {
-        await axios.get(`http://127.0.0.1:5000/logout`);
+        await axios.get(
+          `kdt-1st-project-77.koreacentral.cloudapp.azure.com/logout`
+        );
         window.sessionStorage.clear();
 
         alert("로그아웃 되었습니다.");

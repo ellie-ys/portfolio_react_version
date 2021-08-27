@@ -42,11 +42,14 @@ const RegisterForm = () => {
   const history = useHistory();
 
   const registerRequest = async (email, password, name) => {
-    await axios.post(`http://127.0.0.1:5000/register`, {
-      email,
-      password,
-      name,
-    });
+    await axios.post(
+      `http:/kdt-1st-project-77.koreacentral.cloudapp.azure.com/register`,
+      {
+        email,
+        password,
+        name,
+      }
+    );
   };
 
   const handleRegisterSubmit = (e) => {
@@ -57,8 +60,8 @@ const RegisterForm = () => {
         alert("회원가입되었습니다. 로그인 화면으로 이동합니다.");
         history.push("/");
       } catch (e) {
-        alert("다시 시도해주세요");
-        history.push("/register");
+        alert("다시 가입해주세요");
+        history.push("/login");
       }
     })();
   };
