@@ -43,7 +43,7 @@ export default function Header() {
     try {
       if (window.confirm("로그아웃하시겠습니까?")) {
         await axios.get(
-          `kdt-1st-project-77.koreacentral.cloudapp.azure.com/logout`
+          `http://http://127.0.0.1:5000/logout`
         );
         window.sessionStorage.clear();
 
@@ -51,11 +51,11 @@ export default function Header() {
         history.push("/login");
       }
     } catch (e) {
-      if (e.response.status === "401") {
-        alert("로그아웃 되었습니다.");
-        window.sessionStorage.clear();
-        history.push("/login");
-      }
+      
+      alert("로그아웃 되었습니다.");
+      window.sessionStorage.clear();
+      history.push("/login");
+      
     }
   };
   return (

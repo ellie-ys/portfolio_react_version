@@ -40,7 +40,7 @@ const LoginForm = () => {
   let history = useHistory();
   async function loginPost(e) {
     e.preventDefault();
-    const response = await axios.post(`http://kdt-1st-project-77.koreacentral.cloudapp.azure.com/login`, {
+    const response = await axios.post("http://127.0.0.1:5000/login", {
       email,
       password,
     });
@@ -49,6 +49,19 @@ const LoginForm = () => {
     alert(`${response.data.data.user.name}님 환영합니다`);
   }
 
+  // function loginPost = async (email, password) => {
+  //   try {
+  //     const response = await axios.post(`http://127.0.0.1:5000/login`, {
+  //       email,
+  //       password,
+  //     });
+  //     if (response.data.result === "success")
+  //       history.push(`/elicer/${response.data.data.user.id}`);
+  //   } catch (e) {
+  //     alert(`${response.data.data.user.name}님 환영합니다`);
+  //   }
+  // };
+
   return (
     <>
       <DivForm>
@@ -56,7 +69,11 @@ const LoginForm = () => {
           <Hh2>
             <Title>Login</Title>
             <br />
-            <form onSubmit={(e) => loginPost(e)}>
+            <form
+              onSubmit={(e) => {
+                loginPost(e);
+              }}
+            >
               <div>
                 <InputForm>
                   <label htmlFor="email">이메일</label>

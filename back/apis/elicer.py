@@ -22,7 +22,7 @@ def users():
     
     return jsonify(result="success", data={"users": result}), 200
 
-@bp.route("/<int:user_id>", methods=["GET"])
+@bp.route("/elicer/<int:user_id>", methods=["GET"])
 def user_info(user_id):
     user = User.query.filter_by(id=user_id).one_or_none()
     if user is None:
@@ -30,7 +30,7 @@ def user_info(user_id):
 
     return jsonify(result="success", data={"user": user.to_dict()}), 200
 
-@bp.route("/<int:user_id>/image", methods=["PATCH"])
+@bp.route("/elicer/<int:user_id>/image", methods=["PATCH"])
 def edit_image(user_id):
     if user_id != session.get("auth"):
         return jsonify(result="falied", message="수정 권한이 없습니다."), 403

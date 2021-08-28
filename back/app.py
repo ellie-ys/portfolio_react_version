@@ -10,10 +10,9 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-    CORS(app, supports_credentials=True)
+    CORS(app)
 
     app.config.from_object(config) 
-
     db.init_app(app)
 
     from apis import elicer, auth, education, award, license, portfolio, project

@@ -41,29 +41,24 @@ const RegisterForm = () => {
   const [name, setName] = useState("");
   const history = useHistory();
 
-  const registerRequest = async (email, password, name) => {
-    await axios.post(
-      `http:/kdt-1st-project-77.koreacentral.cloudapp.azure.com/register`,
-      {
-        email,
-        password,
-        name,
-      }
-    );
+  const RegisterPost = async () => {
+    try {
+      const response = await axios.post(
+        `http://http://127.0.0.1:5000/register`,
+        {
+          email,
+          password,
+          name,
+        }
+      );
+      history.push("/login");
+    } catch (e) {
+      alert(e.response.data.message);
+    }
   };
-
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
-    (async () => {
-      try {
-        await registerRequest(email, password, name);
-        alert("회원가입되었습니다. 로그인 화면으로 이동합니다.");
-        history.push("/");
-      } catch (e) {
-        alert("다시 가입해주세요");
-        history.push("/login");
-      }
-    })();
+    RegisterPost();
   };
 
   return (
