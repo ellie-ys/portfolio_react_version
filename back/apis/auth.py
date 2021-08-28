@@ -11,7 +11,11 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from db_connect import db
 
 bp = Blueprint('auth', __name__)
+@bp.route('/')
+def home():
+    return "Hello, Word!"
 
+    
 @bp.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
