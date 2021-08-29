@@ -13,3 +13,10 @@ class Award(db.Model):
         self.name = name
         self.description = description
         self.user_id = user_id
+
+    def to_dict(self):
+        return {
+            "award_id":self.award_id,
+            "name":self.name,
+            "description": self.description,
+        }

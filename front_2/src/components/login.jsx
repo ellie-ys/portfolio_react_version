@@ -34,33 +34,22 @@ const InputForm = styled.div`
   flex-direction: column;
 `;
 
-const LoginForm = () => {
+export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  let history = useHistory();
-  async function loginPost(e) {
-    e.preventDefault();
-    const response = await axios.post("http://127.0.0.1:5000/login", {
-      email,
-      password,
-    });
-    if (response.data.result === "success")
-      history.push(`/elicer/${response.data.data.user.id}`);
-    alert(`${response.data.data.user.name}님 환영합니다`);
-  }
+  const history = useHistory();
 
-  // function loginPost = async (email, password) => {
-  //   try {
-  //     const response = await axios.post(`http://127.0.0.1:5000/login`, {
-  //       email,
-  //       password,
-  //     });
-  //     if (response.data.result === "success")
-  //       history.push(`/elicer/${response.data.data.user.id}`);
-  //   } catch (e) {
-  //     alert(`${response.data.data.user.name}님 환영합니다`);
-  //   }
-  // };
+  const loginPost = async (email, password) => {
+    try {
+      const response = await axios.post(`127.0.0.1:5000/login`, {
+        email,
+        password,
+      });
+      // if (response.data.result === "success")
+      history.push(`/elicer/${response.data.data.user.id}`);
+      alert(`${response.data.data.user.name}님 환영합니다`);
+    } catch (e) {}
+  };
 
   return (
     <>
@@ -71,7 +60,8 @@ const LoginForm = () => {
             <br />
             <form
               onSubmit={(e) => {
-                loginPost(e);
+                e.preventDefault();
+                loginPost(email, password);
               }}
             >
               <div>
@@ -123,6 +113,4 @@ const LoginForm = () => {
       </DivForm>
     </>
   );
-};
-
-export default LoginForm;
+}

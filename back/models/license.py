@@ -19,7 +19,7 @@ class License(db.Model):
     
     def to_dict(self):
         return {
-            "id": self.id,
+            "license_id": self.license_id,
             "name": self.name,
             "agency": self.organiagencyzation,
             "date": self.date.strftime("%Y-%m-%d"),

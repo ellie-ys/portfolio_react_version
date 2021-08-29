@@ -36,8 +36,6 @@ def login():
         session['auth'] = user.id
         return jsonify(result="success", message="로그인되었습니다!", data={"user": user.to_dict()}), 200
 
-
-
 @bp.route("/register", methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':

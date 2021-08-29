@@ -3,35 +3,31 @@ from flask_sqlalchemy import SQLAlchemy
 from db_connect import db
 import config
 from flask_cors import CORS
-from admin import admin_password
+from models.user import *
 from templates import *
+
+from apis.elicer import elicer 
+from apis.auth import auth
+
+from apis.portfolio import portfolio
+
+from admin import admin_password
 
 db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-    CORS(app)
+    app.register_blueprint(elicer)
+    app.register_blueprint(auth)
+    app.register_blueprint(portfolio)
 
     app.config.from_object(config) 
     db.init_app(app)
-
-    from apis import elicer, auth, education, award, license, portfolio, project
-
-    app.register_blueprint(elicer.bp)
-    app.register_blueprint(auth.bp)
-    app.register_blueprint(portfolio.bp)
-
-    app.register_blueprint(education.bp)
-    app.register_blueprint(award.bp)
-    app.register_blueprint(license.bp)
-    app.register_blueprint(project.bp)
-
     app.secret_key = admin_password
     app.config['SESSION_TYPE'] = 'filesystem'
 
-
+    CORS(app)
     return app
     
-
 if __name__ == "__main__":
-    create_app().run()
+    create_app().run(host='0.0.0.0')

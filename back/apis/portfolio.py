@@ -1,37 +1,55 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, request, jsonify,  session
 from models.award import *
 from models.education import *
 from models.license import *
 from models.project import *
 from models.user import *
 
-bp = Blueprint('portfolio', __name__)
+bp = Blueprint('portfolio', __name__, url_prefix='/portfolio')
 
-@bp.route("/<int:user_id>", methods=["GET"])
-def get_portfolio(user_id):
+@bp.route('/<int:user_id>', methods = ['GET'])
+def portfolio(user_id):
     user = User.query.filter_by(id=user_id).one_or_none()
+    
     if user is None:
-        return jsonify(result="falied", message="존재하지 않는 사용자입니다."), 404
+        return jsonify(result="falied", message="사용자 정보가 없습니다.."), 404
+    
     result = {
-        "user": user.to_dict(),
-        "awards": [],
-        "educations": [],
-        "licenses": [],
-        "projects": [],
+        "user": [],
+        "award":[],
+        "education":[],
+        "Project":[],
+        "license":[],
     }
+    user_id = session.get("auth")
+    user = User.query.filter(User.id == user_id).first()
+    if user is not None:
+        # user_data = {
+        #     "id" : user.id,
+        #     "name" : user.name,
+        #     "description": user.description,
+        # } 
+        # retult['user'].append(user_data)
+        result.append(user.to_dict())
 
-    awards = Award.query.filter_by(user_id=user_id).all()
-    educations = Education.query.filter_by(user_id=user_id).all()
-    licenses = License.query.filter_by(user_id=user_id).all()
-    projects = Project.query.filter_by(user_id=user_id).all()
+    educations = Education.query.filter(Education.user_id == user_id).all()
+    if educations is not None:
+        for education in educations:
+            result.append(education.to_dict())
 
-    for award in awards:
-        result["awards"].append(award.to_dict())
-    for education in educations:
-        result["educations"].append(education.to_dict())
-    for license in licenses:
-        result["licenses"].append(license.to_dict())
-    for project in projects:
-        result["projects"].append(project.to_dict())
+    awards = Award.query.filter(Award.user_id == user_id).all()
+    if awards is not None:
+        for award in awards:
+            result.append(award.to_dict())
 
+    licenses = License.query.filter(License.user_id == user_id).all()
+    if licenses is not None:
+        for license in licenses:
+            result.append(license.to_dict())
+
+    projects = Project.query.filter(Project.user_id == user_id).all()
+    if projects is not None:
+        for project in projects:
+            result.append(project.to_dict())
+    
     return jsonify(result="success", data={"portfolio": result}), 200

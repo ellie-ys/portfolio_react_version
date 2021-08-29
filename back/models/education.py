@@ -19,7 +19,7 @@ class Education(db.Model):
     
     def to_dict(self):
         return {
-            "id": self.id,
+            "edu_id": self.id,
             "school": self.school,
             "major": self.major,
             "degree": self.degree,

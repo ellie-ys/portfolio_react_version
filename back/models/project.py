@@ -25,9 +25,10 @@ class Project(db.Model):
         
     def to_dict(self):
         return {
-            "id": self.id,
+            "project_id": self.project_id,
             "name": self.name,
             "description": self.description,
             "startdate": self.startdate.strftime("%Y-%m-%d"),
             "enddate": self.enddate.strftime("%Y-%m-%d"),
+            "url": self.url,
         }
