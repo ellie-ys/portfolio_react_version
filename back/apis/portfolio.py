@@ -1,21 +1,23 @@
-from flask import Blueprint, request, jsonify,  session
+from flask import Blueprint, jsonify,  session, request
+
 from models.award import *
 from models.education import *
 from models.license import *
 from models.project import *
 from models.user import *
+from templates import *
 
-bp = Blueprint('portfolio', __name__, url_prefix='/portfolio')
+bp = Blueprint('portfolio', __name__)
 
-@bp.route('/<int:user_id>', methods = ['GET'])
-def portfolio(user_id):
+@bp.route('/', methods = ['GET'])
+def get_portfolio(user_id):
     user = User.query.filter_by(id=user_id).one_or_none()
     
     if user is None:
         return jsonify(result="falied", message="사용자 정보가 없습니다.."), 404
     
     result = {
-        "user": [],
+        "user": user.to_dict(),
         "award":[],
         "education":[],
         "Project":[],

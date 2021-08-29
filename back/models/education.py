@@ -1,5 +1,4 @@
 from db_connect import db
-
 class Education(db.Model):
 
     __tablename__ = 'education'

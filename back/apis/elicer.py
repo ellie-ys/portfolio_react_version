@@ -4,11 +4,13 @@ from models.award import *
 from models.education import *
 from models.license import *
 from models.project import *
-from models.user import User
+from models.user import *
+from templates import *
+
 
 from db_connect import db
 
-bp = Blueprint('elicer', __name__, url_prefix='/elicer')
+bp = Blueprint('elicer', __name__)
 
 @bp.route("/", methods=["GET"])
 def users():
@@ -60,3 +62,5 @@ def edit_description(user_id):
     db.session.commit()
 
     return jsonify(result="success"), 200
+
+    
