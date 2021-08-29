@@ -6,14 +6,13 @@ const ContainerFooter = styled.div`
   left: 0;
   bottom: 0;
   width: 100%;
-  font-size: 189%;
+  font-size: 130%;
   text-align: center;
   display: flex;
   align-items: center;
   color: #000000;
   box-sizing: border-box;
   justify-content: center;
-  
 `;
 
 function Footer() {
