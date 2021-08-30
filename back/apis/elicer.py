@@ -42,7 +42,7 @@ def edit_image(user_id):
         return jsonify(result="failed", message="존재하지 않는 사용자입니다."), 404
     return "준비 중"
 
-@bp.route("/elicer/<int:user_id>/description", methods=["PATCH"])
+@bp.route("/<int:user_id>/description", methods=["PATCH"])
 def edit_description(user_id):
     if user_id != session.get("auth"):
         return jsonify(result="falied", message="권한이 없는 사용자입니다."), 403

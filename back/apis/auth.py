@@ -16,7 +16,7 @@ import re
 bp = Blueprint('auth', __name__)
 
     
-@bp.route('/login', methods=['GET'])
+@bp.route('/login', methods=['POST'])
 def login():
 
     email = request.form.get("email")
