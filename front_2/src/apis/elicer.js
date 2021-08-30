@@ -2,20 +2,20 @@ import axios from "axios";
 
 export const getUserRequest = async (userId) => {
   const response = await axios.get(
-    `http://localhost:5000/api/elicer/${userId}`
+    `/api/elicer/${userId}`
   );
   return response.data.user;
 };
 
 export const updateUserRequest = async (userId, name, description) => {
-  await axios.patch(`http://localhost:5000/api/elicer/${userId}`, {
+  await axios.patch(`/api/elicer/${userId}`, {
     name,
     description,
   });
 };
 
 export const updateProfileImage = async (userId, image) => {
-  await axios.patch(`http://localhost:5000/api/elicer/${userId}/image`, {
+  await axios.patch(`http://127.0.0.1:5000/api/elicer/${userId}/image`, {
     image,
   });
 };
