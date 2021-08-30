@@ -64,7 +64,7 @@ export default function Header({ loginId, setLoginId }) {
               <Link to="/">메인</Link>
             </li>
             <li>
-              <Link to="/network">네트워크</Link>
+              <Link to="/elicer">네트워크</Link>
             </li>
             <li
               onClick={() => {

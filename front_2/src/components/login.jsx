@@ -60,7 +60,7 @@ const LoginForm = ({ setLoginId }) => {
 
   return (
     <AuthForm.FormWrapper>
-      <Title>Sign up</Title>
+      <Title>Login</Title>
       <AuthForm.Form onSubmit={handleLoginButton}>
         <LoginInputField isValid={isEmailValid}>
           <label htmlFor="email">이메일</label>

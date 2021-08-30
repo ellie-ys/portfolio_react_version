@@ -56,7 +56,7 @@ const Network = ({ loginId, setLoginId }) => {
 
   return (
     <main>
-      {loginId === null && <Redirect to="/api/auth/login" />}
+      {loginId === null && <Redirect to="/login" />}
       <div>
         <input value={query} onChange={(e) => setQuery(e.target.value)} />
         <button onClick={handlebuttonClick}>검색</button>
