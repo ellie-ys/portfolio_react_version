@@ -42,7 +42,7 @@ const RegisterForm = () => {
       try {
         await registerRequest(email, password, name);
         alert("회원가입에 성공하였습니다. 로그인 페이지로 이동합니다.");
-        history.push("/auth/login");
+        history.push("/login");
       } catch (e) {
         alert(e.response.data.message);
       }

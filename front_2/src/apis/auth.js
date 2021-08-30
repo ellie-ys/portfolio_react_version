@@ -16,7 +16,7 @@ export const logoutRequest = async () => {
 };
 
 export const registerRequest = async (email, password, name) => {
-  await axios.post(`http://127.0.0.1:5000/api/auth/register`, {
+  await axios.post(`/api/auth/register`, {
     email,
     password,
     name,

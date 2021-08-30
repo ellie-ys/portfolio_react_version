@@ -49,9 +49,12 @@ export default function Header({ loginId, setLoginId }) {
         history.push("/login");
       }
     } catch (e) {
-      alert("로그아웃 되었습니다.");
-      window.sessionStorage.clear();
-      history.push("/login");
+      if (e.response.status === "401") {
+        alert("로그아웃 되었습니다.");
+        window.sessionStorage.clear();
+        setLoginId(null);
+        history.push("/login");
+      }
     }
   };
   return (

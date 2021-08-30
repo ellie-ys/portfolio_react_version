@@ -49,7 +49,7 @@ const LoginForm = ({ setLoginId }) => {
         setLoginId(loginUserId);
         history.push("/");
       } catch (e) {
-        if (e.response.status === 401) {
+        if (e.resp === 401) {
           alert(e.response.data.message);
           setIsEmailValid(true);
           setIsPasswordValid(true);
