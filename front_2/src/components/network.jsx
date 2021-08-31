@@ -22,7 +22,7 @@ const Network = ({ loginId, setLoginId }) => {
           alert("세션이 만료되었습니다.");
           window.sessionStorage.clear();
           setLoginId(null);
-          history.push("/api/auth/login");
+          history.push("/login");
         }
       }
     })();
