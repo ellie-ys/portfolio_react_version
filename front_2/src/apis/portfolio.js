@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const fetchPortfolio = async (userId) => {
   const response = await axios.get(
-    `http://localhost:5000/api/portfolio/${userId}`
+    `http://kdt-1st-project-77.koreacentral.cloudapp.azure.com/auth/portfolio/${userId}`
   );
   return response.data.portfolio;
 };

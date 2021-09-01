@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const loginRequest = async (email, password) => {
-  const response = await axios.post(`http://localhost:5000/api/auth/login`, {
+  const response = await axios.post(`http://kdt-1st-project-77.koreacentral.cloudapp.azure.com/auth/login`, {
     email,
     password,
   });
@@ -11,12 +11,12 @@ export const loginRequest = async (email, password) => {
 };
 
 export const logoutRequest = async () => {
-  await axios.get(`http://localhost:5000/api/auth/logout`);
+  await axios.get(`http://kdt-1st-project-77.koreacentral.cloudapp.azure.com/auth/logout`);
   window.sessionStorage.clear();
 };
 
 export const registerRequest = async (email, password, name) => {
-  await axios.post(`http://localhost:5000/api/auth/register`, {
+  await axios.post(`http://kdt-1st-project-77.koreacentral.cloudapp.azure.com/auth/register`, {
     email,
     password,
     name,
