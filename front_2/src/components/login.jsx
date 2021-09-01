@@ -47,7 +47,7 @@ const LoginForm = ({ setLoginId }) => {
       try {
         const loginUserId = await loginRequest(email, password);
         setLoginId(loginUserId);
-        history.push("/elicer");
+        history.push("/");
       } catch (e) {
         if (e.response === 401) {
           alert(e.response.data.message);
