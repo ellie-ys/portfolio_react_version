@@ -21,6 +21,8 @@
 - MySQL
 - Javascript
 - React.js Functional Components + Hook
+### ER Diagram
+![image](https://user-images.githubusercontent.com/91821953/144250526-be464612-77c6-4725-8e84-2ce7266d2256.png)
 
 ### 와이어 프레임
 
