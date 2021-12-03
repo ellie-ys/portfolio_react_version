@@ -1,51 +1,58 @@
-CREATE DATABASE elice;
-USE elice;
+CREATE DATABASE racer_portfolio;
+USE racer_portfolio;
 
-CREATE TABLE user(
+CREATE TABLE User(
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `email` VARCHAR(255) NOT NULL,
     `password` VARCHAR(255) NOT NULL,
     `name` VARCHAR(45) NOT NULL,
-    `description` VARCHAR(255),
-    `image` VARCHAR(255)
+    `description` TEXT,
+    `image` TEXT,
+    `type` INT NOT NULL
     );
 
+CREATE TABLE Portfolio(
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `user_id` INT NOT NULL,
+    FOREIGN KEY(`user_id`) REFERENCES User(`id`)
 
-CREATE TABLE education(
-    `edu_id` INT AUTO_INCREMENT PRIMARY KEY,
-    `school` VARCHAR(45) NOT NULL,
+)
+
+CREATE TABLE EduLevel(
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `portfolio_id` INT NOT NULL,
+    `name` VARCHAR(45) NOT NULL,
     `major` VARCHAR(45) NOT NULL,
-    `degree` VARCHAR(45) NOT NULL,
-    `user_id` INT NOT NULL,
-    FOREIGN KEY(`user_id`) REFERENCES user(`id`)
+    `type` INT NOT NULL,
+    FOREIGN KEY(`portfolio_id`) REFERENCES Portfolio(`id`)
 );
 
-CREATE TABLE award(
-    `award_id` INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE Award(
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `portfolio_id` INT NOT NULL,
     `name` VARCHAR(45) NOT NULL,
-    `description` VARCHAR(45) NOT NULL,
-    `user_id` INT NOT NULL,
-    FOREIGN KEY(`user_id`) REFERENCES user(`id`)
+    `description` TEXT NOT NULL,
+    FOREIGN KEY(`portfolio_id`) REFERENCES Portfolio(`id`)
 );
 
 
-CREATE TABLE project(
-    `project_id` INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE Project(
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `portfolio_id` INT NOT NULL,
     `name` VARCHAR(45) NOT NULL,
-    `description` VARCHAR(255) NOT NULL,
+    `description` TEXT NOT NULL,
     `startdate` DATE NOT NULL,
     `enddate` DATE NOT NULL,
-    `url` VARCHAR(255) NULL,
-    `user_id` INT NOT NULL,
-    FOREIGN KEY(`user_id`) REFERENCES user(`id`)
+    `url` VARCHAR(100),
+    FOREIGN KEY(`portfolio_id`) REFERENCES Portfolio(`id`)
     
 );
 
-CREATE TABLE license(
-    `license_id` INT AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(255) NOT NULL,
-    `agency` VARCHAR(20) NOT NULL,
+CREATE TABLE Certificate(
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `portfolio_id` INT NOT NULL,
+    `name` VARCHAR(45) NOT NULL,
+    `agency` VARCHAR(45) NOT NULL,
     `date` DATE NOT NULL,
-    `user_id` INT NOT NULL,
-    FOREIGN KEY (`user_id`) REFERENCES user(`id`)
+    FOREIGN KEY(`portfolio_id`) REFERENCES Portfolio(`id`)
 );
