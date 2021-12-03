@@ -14,7 +14,6 @@ const Main = () => {
         <Edu />
         <Award />
         <Project />
-        <Profile />
         <Certificate />
       </div>
       <Footer />
