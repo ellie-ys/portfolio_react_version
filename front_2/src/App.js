@@ -1,13 +1,19 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { NavComponent, Main, Network, Login } from "./portfolio/components";
+import {
+  NavComponent,
+  Main,
+  Network,
+  Login,
+  Register,
+} from "./portfolio/components";
 import { Provider, useSelector } from "react-redux";
 import store from "./redux/store";
 
 function App() {
   return (
     <Provider store={store}>
-      <Router>
+      <BrowserRouter>
         <NavComponent />
         <Route path="/" exact>
           <Main />
@@ -18,7 +24,10 @@ function App() {
         <Route path="/login">
           <Login />
         </Route>
-      </Router>
+        <Route path="/register">
+          <Register />
+        </Route>
+      </BrowserRouter>
     </Provider>
   );
 }
