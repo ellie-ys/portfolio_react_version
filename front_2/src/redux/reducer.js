@@ -1,22 +1,22 @@
 const initState = {
-    auth: "로그인 안함"
-    }
+  auth: null,
+};
 
-    const Reducer = (state = initState, action) => {
-    switch(action.type) {
-        case "LOGIN":
-        return {
-            auth: "로그인 함"
-        }
+const Reducer = (state = initState, action) => {
+  switch (action.type) {
+    case "LOGIN":
+      return {
+        auth: "Login 성공!",
+      };
 
-        case "LOGOUT":
-        return {
-            auth: "로그인 안함"
-        }
+    case "LOGOUT":
+      return {
+        auth: null,
+      };
 
-        default:
-        return state;
-    }
-    }
+    default:
+      return state;
+  }
+};
 
-    export default Reducer;
+export default Reducer;
