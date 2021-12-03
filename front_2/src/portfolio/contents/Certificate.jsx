@@ -8,7 +8,7 @@ const Certificate = () => {
     <div>
       <h2> Certificate </h2>
       <p> name </p>
-      <p> institution </p>
+      <p> agency </p>
       <p> date </p>
       <button> Edit </button>
     </div>
