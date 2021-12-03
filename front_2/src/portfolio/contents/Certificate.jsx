@@ -6,11 +6,11 @@ const Certificate = () => {
 
   return (
     <div>
-      <h2> 자격증 </h2>
-      <p> 자격증 이름 </p>
-      <p> 발급기관 </p>
-      <p> 날짜 </p>
-      <button> 수정 </button>
+      <h2> Certificate </h2>
+      <p> name </p>
+      <p> institution </p>
+      <p> date </p>
+      <button> Edit </button>
     </div>
   );
 };

@@ -13,7 +13,7 @@ import store from "./redux/store";
 function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <Router>
         <NavComponent />
         <Route path="/" exact>
           <Main />
@@ -27,7 +27,7 @@ function App() {
         <Route path="/register">
           <Register />
         </Route>
-      </BrowserRouter>
+      </Router>
     </Provider>
   );
 }

@@ -6,10 +6,10 @@ const Edu = () => {
 
   return (
     <div>
-      <h2> 학력 </h2>
-      <p> 대학교 </p>
-      <p> 전공 </p>
-      <button> 수정 </button>
+      <h2> Education </h2>
+      <p> university </p>
+      <p> major </p>
+      <button> Edit </button>
     </div>
   );
 };

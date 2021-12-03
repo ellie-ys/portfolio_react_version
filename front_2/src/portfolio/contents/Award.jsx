@@ -6,10 +6,10 @@ const Award = () => {
 
   return (
     <div>
-      <h2> 수상이력 </h2>
-      <p> 상 이름 </p>
-      <p> 한줄 소개 </p>
-      <button> 수정 </button>
+      <h2> Award </h2>
+      <p> name </p>
+      <p> description </p>
+      <button> Edit </button>
     </div>
   );
 };

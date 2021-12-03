@@ -8,9 +8,9 @@ const Profile = () => {
   return(
     <div>
       <img></img>
-      <p> 이름 </p>
-      <span> 한줄 소개 </span>
-      <button> 수정 </button>
+      <p> name </p>
+      <span> description </span>
+      <button> Edit </button>
     </div>
   );
 }

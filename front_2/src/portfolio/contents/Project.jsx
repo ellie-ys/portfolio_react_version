@@ -6,12 +6,12 @@ const Project = () => {
 
   return (
     <div>
-      <h2> 프로젝트 </h2>
-      <p> 프로젝트명 </p>
-      <p> 한줄 소개 </p>
-      <p> 날짜 </p>
-      <p> 프로젝트 url</p>
-      <button> 수정 </button>
+      <h2> Project </h2>
+      <p> name </p>
+      <p> description </p>
+      <p> date </p>
+      <p> project url</p>
+      <button> Edit </button>
     </div>
   );
 };
