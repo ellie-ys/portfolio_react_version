@@ -1,4 +1,5 @@
 # Elicer portfolio service
+(2021. 08. 16 - 2021. 08. 28)
 
 ### 프로젝트 소개
 
