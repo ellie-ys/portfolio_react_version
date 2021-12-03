@@ -6,7 +6,7 @@ const Reducer = (state = initState, action) => {
   switch (action.type) {
     case "LOGIN":
       return {
-        auth: "Login 성공!",
+        auth: action.auth,
       };
 
     case "LOGOUT":
