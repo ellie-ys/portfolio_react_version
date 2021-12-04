@@ -4,9 +4,11 @@ from flask_migrate import Migrate
 from db_connect import db
 from apis.server_api import serverbp
 
+
 from db_connect import db
 import config
-from admin import admin_password
+from admin import SECRET_KEY, JWT_SECRET_KEY
+from flask_jwt_extended import JWTManager
 
 
 def create_app():
@@ -21,7 +23,12 @@ def create_app():
 
     from models import user, award, education, project, certificate
     
-    app.secret_key = admin_password
+    app.secret_key = SECRET_KEY
+    app.config['JWT_SECRET_KEY'] = JWT_SECRET_KEY
+    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = config.expires_access
+    app.config['JWT_REFRESH_TOKEN_EXPIRES'] = config.expires_refresh
+    jwt = JWTManager(app)
+
     CORS(app)
 
     return app
