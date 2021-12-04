@@ -1,8 +1,11 @@
 export const login = (auth) => ({
-    type: "LOGIN",
-    auth: auth
-})
+  type: "LOGIN",
+  auth: auth,
+  isLoggedIn: true,
+});
 
 export const logout = () => ({
-    type: "LOGOUT",
-})
+  type: "LOGOUT",
+  auth: {},
+  isLoggedIn: false,
+});
