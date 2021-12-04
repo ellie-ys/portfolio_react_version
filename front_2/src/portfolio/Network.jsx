@@ -16,7 +16,6 @@ const Network = () => {
 
   useEffect(async () => {
     const response = await axios.post(BACKEND_URL + "/network", "", header);
-    console.log(response);
   }, []);
 
   return (

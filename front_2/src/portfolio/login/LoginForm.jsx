@@ -19,7 +19,7 @@ const LoginForm = () => {
         type: 1,
       });
 
-      console.log(response);
+      console.log(response.data);
       dispatch(login(response.data.access_token));
       history.push("/");
     } catch (error) {

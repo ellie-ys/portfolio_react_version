@@ -15,14 +15,13 @@ const ProfileStyle = styled.div`
   }
 `;
 
-const Profile = () => {
-  const auth = useSelector((state) => state.auth);
-
+const Profile = (props) => {
   return (
     <ProfileStyle>
       <img></img>
-      <p> name </p>
-      <span> description </span>
+      <p> {props.profileData.name} </p>
+      <span> {props.profileData.description} </span>
+
       <button> Edit </button>
     </ProfileStyle>
   );
