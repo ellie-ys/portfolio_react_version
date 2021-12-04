@@ -1,11 +1,8 @@
-export const login = (auth) => ({
+export const login = (user) => ({
   type: "LOGIN",
-  auth: auth,
-  isLoggedIn: true,
+  user,
 });
 
 export const logout = () => ({
   type: "LOGOUT",
-  auth: {},
-  isLoggedIn: false,
 });
