@@ -10,7 +10,7 @@ class Education(db.Model):
     major = db.Column(db.String(45),  nullable = False)
     type = db.Column(db.String(45), nullable = False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE", onupdate="CASCADE"), nullable=False)
-    userEducation = relationship("User", backref = backref("education", order_by = id))
+    user_education = relationship("User", backref = backref("education", order_by = id))
 
     def __init__(self, school, major, degree, user_id):
         self.school = school

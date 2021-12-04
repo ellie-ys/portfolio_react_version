@@ -6,9 +6,9 @@ class Award(db.Model):
 
     award_id = db.Column(db.Integer, primary_key=True, autoincrement=True) 
     name = db.Column(db.String(45), nullable = False)
-    description = db.Column(db.Text())
+    description = db.Column(db.String(500))
     user_id = db.Column("User", db.ForeignKey('user.id'))
-    userAward = relationship("User", backref=backref("awards", order_by =id))
+    user_award = relationship("User", backref=backref("awards", order_by =id))
 
     def __init__(self, name, description, user_id):
         self.name = name
