@@ -1,17 +1,22 @@
 const initState = {
-  auth: null,
+  auth: {},
+  isLoggedIn: false,
 };
 
-const Reducer = (state = initState, action) => {
+const user = (state = initState, action) => {
   switch (action.type) {
     case "LOGIN":
       return {
-        auth: action.auth,
+        ...state,
+        access_token: action.access_token,
+        isLoggedIn: action.isLoggedIn,
       };
 
     case "LOGOUT":
       return {
-        auth: null,
+        ...state,
+        access_token: action.access_token,
+        isLoggedIn: action.isLoggedIn,
       };
 
     default:
@@ -19,4 +24,4 @@ const Reducer = (state = initState, action) => {
   }
 };
 
-export default Reducer;
+export default user;
