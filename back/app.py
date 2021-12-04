@@ -1,35 +1,28 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
+from flask_migrate import Migrate
+from db_connect import db
+from apis.server_api import serverbp
+
 from db_connect import db
 import config
-from flask_cors import CORS
 from admin import admin_password
-from templates import *
 
-db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-    CORS(app, supports_credentials=True)
+    app.register_blueprint(serverbp)
 
     app.config.from_object(config) 
-
     db.init_app(app)
 
-    from apis import elicer, auth, education, award, license, portfolio, project
+    migrate = Migrate()
+    migrate.init_app(app, db, compare_type=True)
 
-    app.register_blueprint(elicer.bp)
-    app.register_blueprint(auth.bp)
-    app.register_blueprint(portfolio.bp)
-
-    app.register_blueprint(education.bp)
-    app.register_blueprint(award.bp)
-    app.register_blueprint(license.bp)
-    app.register_blueprint(project.bp)
-
+    from models import user, award, education, project, certificate
+    
     app.secret_key = admin_password
-    app.config['SESSION_TYPE'] = 'filesystem'
-
+    CORS(app)
 
     return app
 
