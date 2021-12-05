@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
 
 const ProjectFormStyle = styled.div`
   border: 1px solid green;
@@ -53,7 +54,7 @@ const ProjectForm = (props) => {
   };
 
   const changeStartdateHandler = (date) => {
-    setStartdate(date);
+    setStartdate(moment(date).format("YYYY-MM-DD"));
     const newProjectData = props.projectData.map((item) =>
       item.id === props.formId ? { ...item, startdate: date } : item
     );
@@ -61,8 +62,9 @@ const ProjectForm = (props) => {
   };
 
   const changeEnddateHandler = (date) => {
-    setEnddate(date);
-    console.log(enddate.toDateString());
+    setEnddate(moment(date).format("YYYY-MM-DD"));
+    console.log(enddate);
+
     const newProjectData = props.projectData.map((item) =>
       item.id === props.formId ? { ...item, enddate: date } : item
     );
@@ -84,6 +86,12 @@ const ProjectForm = (props) => {
     );
     props.setDeleteList(newDeleteList);
     props.setProjectData(newProjectData);
+  };
+  const formattedStartDate = (sdate) => {
+    if (typeof sdate === "string") {
+      const dateArr = sdate.split("-");
+      return new Date(dateArr[0], dateArr[1] - 1, dateArr[2]);
+    } else return sdate;
   };
 
   return (
@@ -109,7 +117,7 @@ const ProjectForm = (props) => {
         <DatePickerStyle>
           <DatePicker
             dateFormat="yyyy-MM-dd"
-            selected={startdate}
+            selected={formattedStartDate(startdate)}
             onChange={changeStartdateHandler}
           />
         </DatePickerStyle>{" "}
@@ -117,7 +125,7 @@ const ProjectForm = (props) => {
         <DatePickerStyle>
           <DatePicker
             dateFormat="yyyy-MM-dd"
-            selected={enddate}
+            selected={formattedStartDate(enddate)}
             onChange={changeEnddateHandler}
           />
         </DatePickerStyle>

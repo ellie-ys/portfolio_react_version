@@ -24,10 +24,10 @@ const Main = () => {
     },
   };
   const [userId, setUserId] = useState();
-  const [profileData, setProfileData] = useState([]);
+  const [profileData, setProfileData] = useState({});
   const [eduData, setEduData] = useState([]);
   const [awardData, setAwardData] = useState([]);
-  const [projectData, setProjectData] = useState({});
+  const [projectData, setProjectData] = useState([]);
   const [certificateData, setCertificateData] = useState([]);
   const [isFetched, setIsFetched] = useState(false);
 
