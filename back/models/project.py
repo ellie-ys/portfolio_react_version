@@ -16,11 +16,12 @@ class Project(db.Model):
     user_project = relationship("User", backref= backref("projects", order_by = id))
 
 
-    def __init__(self, name, description, startdate, enddate, user_id):
+    def __init__(self, name, description, startdate, enddate, url, user_id):
         self.name = name
         self.description = description
         self.startdate = startdate
         self.enddate = enddate
+        self.url = url
         self.user_id = user_id
 
     def as_dict(self):
