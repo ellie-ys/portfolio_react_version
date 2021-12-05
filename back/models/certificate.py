@@ -19,4 +19,4 @@ class Certificate(db.Model):
         self.user_id = user_id
 
     def as_dict(self):
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        return dict([[c.name, getattr(self, c.name).strftime('%Y-%m-%d')] if (c.name == 'date') else [c.name, getattr(self, c.name)] for c in self.__table__.columns])
