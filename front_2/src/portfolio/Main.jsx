@@ -23,17 +23,17 @@ const Main = () => {
       Authorization: `Bearer ${access_token}`,
     },
   };
-
+  const [userId, setUserId] = useState();
   const [profileData, setProfileData] = useState([]);
   const [eduData, setEduData] = useState([]);
   const [awardData, setAwardData] = useState([]);
-  const [projectData, setProjectData] = useState([]);
+  const [projectData, setProjectData] = useState({});
   const [certificateData, setCertificateData] = useState([]);
   const [isFetched, setIsFetched] = useState(false);
 
   useEffect(async () => {
     const response = await axios.get(BACKEND_URL + "/posts", header);
-
+    setUserId(response.data.user_id);
     setProfileData(response.data.profile);
     setEduData(response.data.edus);
     setAwardData(response.data.awards);
@@ -48,10 +48,26 @@ const Main = () => {
       <MainStyle>
         {isFetched ? (
           <div>
-            <Profile profileData={profileData} />
-            <Education eduData={eduData} setEduData={setEduData} />
-            <Award awardData={awardData} />
-            <Project projectData={projectData} />
+            <Profile
+              profileData={profileData}
+              setProfileData={setProfileData}
+              userId={userId}
+            />
+            <Education
+              eduData={eduData}
+              setEduData={setEduData}
+              userId={userId}
+            />
+            <Award
+              awardData={awardData}
+              setAwardData={setAwardData}
+              userId={userId}
+            />
+            <Project
+              projectData={projectData}
+              setProjectData={setProjectData}
+              userId={userId}
+            />
             <Certificate certificateData={certificateData} />
           </div>
         ) : (
