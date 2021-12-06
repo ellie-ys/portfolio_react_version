@@ -4,7 +4,6 @@ from models.project import Project
 from db_connect import db
 
 projects = Blueprint('projects', __name__, url_prefix='/projects')
-
 @projects.route('', methods=['PUT'])
 @jwt_required()
 def put_project():
@@ -38,7 +37,6 @@ def delete_project():
     
     delete_list = request.get_json()
     for item in delete_list:
-        print(item)
         target_project = Project.query.filter_by(id=item).first()
         db.session.delete(target_project)
         db.session.commit()
