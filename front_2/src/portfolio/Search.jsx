@@ -1,12 +1,12 @@
 import React from "react";
 
 const Search = () => {
-    return (
+  return (
     <div>
-    <input type="text" />
-    <button> 검색 </button>
+      <input type="text" />
+      <button> Search </button>
     </div>
-    );
+  );
 };
 
 export default Search;

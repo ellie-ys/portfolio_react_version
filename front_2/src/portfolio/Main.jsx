@@ -15,14 +15,16 @@ const MainStyle = styled.div`
 `;
 
 const Main = () => {
-  const access_token = useSelector((state) => state.user.access_token);
   // const isLogin = useSelector((state) => state.auth);
+  // console.log(isLogin);
+  const access_token = useSelector((state) => state.user.access_token);
   const header = {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${access_token}`,
     },
   };
+
   const [userId, setUserId] = useState();
   const [profileData, setProfileData] = useState({});
   const [eduData, setEduData] = useState([]);

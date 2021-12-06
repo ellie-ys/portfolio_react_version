@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LoginForm from "./LoginForm";
 
 const Login = () => {
   const history = useHistory();
-  const isLogin = useSelector((state) => state.auth);
+  const isLogin = useSelector((state) => state.user.isLoggedIn);
+
+  useEffect(() => {
+    if (isLogin) {
+      history.push("/");
+    }
+  }, []);
 
   const registerHandler = () => {
     history.push("/register");
   };
+
   return (
     <div>
       <LoginForm />

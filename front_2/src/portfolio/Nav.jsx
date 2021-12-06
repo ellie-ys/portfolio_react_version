@@ -7,7 +7,7 @@ import { logout } from "../redux/action";
 
 const Navi = (props) => {
   const dispatch = useDispatch();
-  const isLogin = useSelector((state) => state.auth);
+  const isLogin = useSelector((state) => state.user.isLoggedIn);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -25,9 +25,6 @@ const Navi = (props) => {
             </Link>
             <Link to="/network" className="nav-link">
               Network
-            </Link>
-            <Link className="nav-link" onClick={logoutHandler}>
-              Logout
             </Link>
             {isLogin ? (
               <Link to="/" className="nav-link" onClick={logoutHandler}>
