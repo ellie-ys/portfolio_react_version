@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import axios from "axios";
+import CertificateContents from "./CertificateContents";
+import CertificateForm from "./CertificateForm";
+import { BACKEND_URL } from "../../../env";
+import moment from "moment";
 
 const CertificateStyle = styled.div`
   border: solid 3px grey;
@@ -13,6 +18,9 @@ const CertificateStyle = styled.div`
     width: 30%;
     margin: 0 auto;
   }
+`;
+const CertificateButtonWrapper = styled.div`
+  margin-top: 20px;
 `;
 
 const Certificate = (props) => {

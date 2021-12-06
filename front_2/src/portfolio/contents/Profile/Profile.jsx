@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSelector, useEffect } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import axios from "axios";
 import { BACKEND_URL } from "../../../env";
