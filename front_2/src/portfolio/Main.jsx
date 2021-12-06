@@ -68,7 +68,11 @@ const Main = () => {
               setProjectData={setProjectData}
               userId={userId}
             />
-            <Certificate certificateData={certificateData} />
+            <Certificate
+              certificateData={certificateData}
+              setCertificateData={setCertificateData}
+              userId={userId}
+            />
           </div>
         ) : (
           <div> Loading... </div>
