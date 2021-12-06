@@ -87,7 +87,7 @@ const ProjectForm = (props) => {
     props.setDeleteList(newDeleteList);
     props.setProjectData(newProjectData);
   };
-  const formattedStartDate = (sdate) => {
+  const formattedDate = (sdate) => {
     if (typeof sdate === "string") {
       const dateArr = sdate.split("-");
       return new Date(dateArr[0], dateArr[1] - 1, dateArr[2]);
@@ -117,7 +117,7 @@ const ProjectForm = (props) => {
         <DatePickerStyle>
           <DatePicker
             dateFormat="yyyy-MM-dd"
-            selected={formattedStartDate(startdate)}
+            selected={formattedDate(startdate)}
             onChange={changeStartdateHandler}
           />
         </DatePickerStyle>{" "}
@@ -125,7 +125,7 @@ const ProjectForm = (props) => {
         <DatePickerStyle>
           <DatePicker
             dateFormat="yyyy-MM-dd"
-            selected={formattedStartDate(enddate)}
+            selected={formattedDate(enddate)}
             onChange={changeEnddateHandler}
           />
         </DatePickerStyle>
