@@ -90,6 +90,7 @@ const Award = (props) => {
                 formId={element.id}
                 formName={element.name}
                 formDescription={element.description}
+                formUserId={element.user_id}
                 awardData={props.awardData}
                 setAwardData={props.setAwardData}
                 deleteList={deleteList}

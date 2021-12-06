@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const AwardFormStyle = styled.div`
@@ -19,19 +19,25 @@ const AwardForm = (props) => {
 
   const changeNameHandler = (e) => {
     setAward(e.target.value);
-    const newAwardData = props.awardData.map((item) =>
-      item.id === props.formId ? { ...item, name: e.target.value } : item
-    );
-    props.setAwardData(newAwardData);
   };
 
   const changeDescriptionHandler = (e) => {
     setDescription(e.target.value);
-    const newAwardData = props.awardData.map((item) =>
-      item.id === props.formId ? { ...item, description: e.target.value } : item
-    );
-    props.setAwardData(newAwardData);
   };
+  useEffect(() => {
+    const newAwardData = props.awardData.map((item) =>
+      item.id === props.formId
+        ? {
+            id: props.formId,
+            name: award,
+            description: description,
+            user_id: props.formUserId,
+          }
+        : item
+    );
+
+    props.setAwardData(newAwardData);
+  }, [award, description]);
 
   const deleteHandler = () => {
     const newDeleteList = props.deleteList.concat(props.formId);
