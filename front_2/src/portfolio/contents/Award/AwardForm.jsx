@@ -10,12 +10,8 @@ const AwardFormStyle = styled.div`
 `;
 
 const AwardForm = (props) => {
-  const [award, setAward] = useState(
-    props.awardData.filter((item) => item.id === props.formId)[0].name
-  );
-  const [description, setDescription] = useState(
-    props.awardData.filter((item) => item.id === props.formId)[0].description
-  );
+  const [award, setAward] = useState(props.formName);
+  const [description, setDescription] = useState(props.formDescription);
 
   const changeNameHandler = (e) => {
     setAward(e.target.value);

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useEffect } from "react-redux";
 import styled from "styled-components";
 import axios from "axios";
-import { BACKEND_URL } from "../../env";
+import { BACKEND_URL } from "../../../env";
 
 const ProfileStyle = styled.div`
   border: solid 3px grey;
@@ -88,6 +88,7 @@ const Profile = (props) => {
   const changeDescriptionHandler = (e) => {
     setDescription(e.target.value);
   };
+
   useEffect(() => {
     const newProfileData = {
       id: props.formId,

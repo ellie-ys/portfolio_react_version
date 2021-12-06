@@ -21,21 +21,11 @@ const InnerFormStyle = styled.div`
 `;
 
 const ProjectForm = (props) => {
-  const [project, setProject] = useState(
-    props.projectData.filter((item) => item.id === props.formId)[0].name
-  );
-  const [description, setDescription] = useState(
-    props.projectData.filter((item) => item.id === props.formId)[0].description
-  );
-  const [startdate, setStartdate] = useState(
-    props.projectData.filter((item) => item.id === props.formId)[0].startdate
-  );
-  const [enddate, setEnddate] = useState(
-    props.projectData.filter((item) => item.id === props.formId)[0].enddate
-  );
-  const [url, setUrl] = useState(
-    props.projectData.filter((item) => item.id === props.formId)[0].url
-  );
+  const [project, setProject] = useState(props.formName);
+  const [description, setDescription] = useState(props.formDescription);
+  const [startdate, setStartdate] = useState(props.formStartdate);
+  const [enddate, setEnddate] = useState(props.formEnddate);
+  const [url, setUrl] = useState(props.formUrl);
 
   const changeNameHandler = (e) => {
     setProject(e.target.value);

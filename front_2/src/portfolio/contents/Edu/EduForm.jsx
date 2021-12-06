@@ -10,15 +10,9 @@ const EduFormStyle = styled.div`
 `;
 
 const EduForm = (props) => {
-  const [edu, setEdu] = useState(
-    props.eduData.filter((item) => item.id === props.formId)[0].name
-  );
-  const [major, setMajor] = useState(
-    props.eduData.filter((item) => item.id === props.formId)[0].major
-  );
-  const [type, setType] = useState(
-    props.eduData.filter((item) => item.id === props.formId)[0].type
-  );
+  const [edu, setEdu] = useState(props.formName);
+  const [major, setMajor] = useState(props.formMajor);
+  const [type, setType] = useState(props.formType);
 
   const changeNameHandler = (e) => {
     setEdu(e.target.value);
