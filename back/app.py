@@ -2,7 +2,9 @@ from flask import Flask
 from flask_cors import CORS
 from flask_migrate import Migrate
 from db_connect import db
+
 from apis.server_api import serverbp
+
 from apis.posts import posts
 from apis.edus import edus
 from apis.awards import awards
@@ -10,7 +12,6 @@ from apis.profile import profiles
 from apis.projects import projects
 from apis.certificates import certificates
 
-from db_connect import db
 import config
 from admin import SECRET_KEY, JWT_SECRET_KEY
 from flask_jwt_extended import JWTManager
@@ -48,4 +49,4 @@ def create_app():
 
 
 if __name__ == "__main__":
-    create_app().run()
+    create_app().run(debug=True) #배포할 때 devug=True안지우면 안됨
