@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useEffect } from "react-redux";
 import styled from "styled-components";
 import axios from "axios";
 import { BACKEND_URL } from "../../env";
@@ -79,25 +79,26 @@ const Profile = (props) => {
 
   const changeNameHandler = (e) => {
     setUserName(e.target.value);
-    const newProfileData = { ...props.profileData, name: e.target.value };
-    props.setProfileData(newProfileData);
   };
 
   const changeImageHandler = (e) => {
     setImage(e.target.value);
-    const newProfileData = { ...props.profileData, image: e.target.value };
-    props.setProfileData(newProfileData);
   };
 
   const changeDescriptionHandler = (e) => {
     setDescription(e.target.value);
-    const newProfileData = {
-      ...props.profileData,
-      description: e.target.value,
-    };
-    props.setProfileData(newProfileData);
-    // console.log(props.profileData);
   };
+  useEffect(() => {
+    const newProfileData = {
+      id: props.formId,
+      name: userName,
+      description: description,
+      image: image,
+      user_id: props.formUserId,
+    };
+
+    props.setProfileData(newProfileData);
+  }, [userName, description, image]);
 
   return (
     <ProfileStyle>
