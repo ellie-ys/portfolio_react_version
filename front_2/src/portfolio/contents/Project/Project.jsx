@@ -25,10 +25,6 @@ const ProjectButtonWrapper = styled.div`
 `;
 
 const Project = (props) => {
-  useEffect(() => {
-    console.log(props.projectData);
-  }, []);
-
   const [edit, setEdit] = useState(false);
   const [copyProjectData, setCopyProjectData] = useState(props.projectData);
   const [newIndex, setNewIndex] = useState(0);
@@ -66,7 +62,6 @@ const Project = (props) => {
       props.projectData,
       header
     );
-    console.log(response.data);
     props.setProjectData(response.data);
     setEdit(false);
     setNewIndex(0);

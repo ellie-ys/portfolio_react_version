@@ -19,24 +19,23 @@ const LoginForm = () => {
         type: 1,
       });
 
-      console.log(response.data);
       dispatch(login(response.data.access_token));
       history.push("/");
     } catch (error) {
-      console.log(error.response);
+      alert(error.response);
     }
   };
 
   return (
     <>
       <form>
-        <p>아이디</p>
+        <p>Email</p>
         <input
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <p>비밀번호</p>
+        <p>Password</p>
         <input
           type="password"
           value={password}
@@ -44,7 +43,7 @@ const LoginForm = () => {
         />
       </form>
       <button type="submit" onClick={loginHandler}>
-        로그인
+        Login
       </button>
     </>
   );
