@@ -16,6 +16,7 @@ import config
 from admin import SECRET_KEY, JWT_SECRET_KEY
 from flask_jwt_extended import JWTManager
 
+import os
 
 def create_app():
     app = Flask(__name__)
@@ -37,6 +38,8 @@ def create_app():
 
     from models import user, award, education, project, certificate
     
+    app.config['UPLOAD_DIR'] = os.getcwd()
+
     app.secret_key = SECRET_KEY
     app.config['JWT_SECRET_KEY'] = JWT_SECRET_KEY
     app.config['JWT_ACCESS_TOKEN_EXPIRES'] = config.expires_access
