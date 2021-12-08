@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import AwardContents from "./AwardContents";
 import AwardForm from "./AwardForm";
-import { BACKEND_URL } from "../../../env";
+import { BACKEND_URL } from "../../../utils/env";
 
 const AwardStyle = styled.div`
   border: solid 3px grey;

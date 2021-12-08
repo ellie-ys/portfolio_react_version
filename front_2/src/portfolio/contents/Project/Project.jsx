@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import ProjectContents from "./ProjectContents";
 import ProjectForm from "./ProjectForm";
-import { BACKEND_URL } from "../../../env";
+import { BACKEND_URL } from "../../../utils/env";
 import moment from "moment";
 
 const ProjectStyle = styled.div`

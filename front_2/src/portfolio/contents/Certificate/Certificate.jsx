@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import CertificateContents from "./CertificateContents";
 import CertificateForm from "./CertificateForm";
-import { BACKEND_URL } from "../../../env";
+import { BACKEND_URL } from "../../../utils/env";
 import moment from "moment";
 
 const CertificateStyle = styled.div`

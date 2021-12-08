@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import axios from "axios";
-import { BACKEND_URL } from "../../../env";
+import { BACKEND_URL } from "../../../utils/env";
 import EduContents from "./EduContents";
 import EduForm from "./EduForm";
 

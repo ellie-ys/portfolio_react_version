@@ -4,7 +4,7 @@ import { Award, Certificate, Education, Profile, Project } from "./Contents";
 import Footer from "./Footer.jsx";
 import styled from "styled-components";
 import axios from "axios";
-import { BACKEND_URL } from "../env";
+import { BACKEND_URL } from "../utils/env";
 
 const MainStyle = styled.div`
   display: flex;
