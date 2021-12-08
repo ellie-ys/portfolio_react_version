@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { login } from "../../redux/action";
-import { BACKEND_URL } from "../../env";
+import { BACKEND_URL } from "../../utils/env";
 import axios from "axios";
 
 const LoginForm = () => {

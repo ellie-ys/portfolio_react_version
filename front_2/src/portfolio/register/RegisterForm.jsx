@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { BACKEND_URL } from "../../env";
+import { BACKEND_URL } from "../../utils/env";
 
 const RegisterForm = () => {
   const [email, setEmail] = useState("");
