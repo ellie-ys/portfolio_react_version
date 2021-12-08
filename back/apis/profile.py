@@ -18,32 +18,34 @@ def put_profile():
   
   user_info = get_jwt_identity()
   
-  if 'image' not in request.files:
-    return jsonify("fail to upload"), 400
-  
-  image_file = request.files['image'].read()
-  image_save = Image.open(io.BytesIO(image_file))
-  filename = str(user_info['id']) + '.' + image_save.format
-  image_save.save(os.path.join(current_app.config['UPLOAD_DIR'], 'media', filename))
-  
-  buffered = io.BytesIO()
-  image_save.save(buffered, format=image_save.format)
-  image_bytes = buffered.getvalue()
-  image_base64 = b64encode(image_bytes)
-  image_str = image_base64.decode('utf-8')
+  if 'image' in request.files:
+    image_file = request.files['image'].read()
+    image_save = Image.open(io.BytesIO(image_file))
+    filename = str(user_info['id']) + '.' + image_save.format
+    image_save.save(os.path.join(current_app.config['UPLOAD_DIR'], 'media', filename))
+    
+    target_profile = User.query.filter_by(id = user_info['id']).first()
+    target_profile.image = filename
+    db.session.commit()
+
+
 
   
   target_profile = User.query.filter_by(id = user_info['id']).first()
+  if target_profile.image:
+    profile_image = Image.open(os.path.join(current_app.config['UPLOAD_DIR'], 'media', target_profile.image))
+    buffered = io.BytesIO()
+    profile_image.save(buffered, format=profile_image.format)
+    profile_image_bytes = buffered.getvalue()
+    profile_image_base64 = b64encode(profile_image_bytes)
+    profile_image_str = profile_image_base64.decode('utf-8')
+  
   target_profile.name = request.form['name']
   target_profile.description = request.form['description']
-  target_profile.image = filename
 
-  db.session.commit()
-  
   json_profiles = json.dumps({
     'name': target_profile.name,
     'description': target_profile.description,
-    'image': image_str
+    'image': profile_image_str if target_profile.image else target_profile.image
   })
   return json_profiles, 200
-
