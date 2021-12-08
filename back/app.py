@@ -11,6 +11,7 @@ from apis.awards import awards
 from apis.profile import profiles
 from apis.projects import projects
 from apis.certificates import certificates
+from apis.network import network
 
 import config
 from admin import SECRET_KEY, JWT_SECRET_KEY
@@ -21,7 +22,7 @@ import os
 def create_app():
     app = Flask(__name__)
 
-
+    app.register_blueprint(network)
     app.register_blueprint(serverbp)
     app.register_blueprint(posts)
     app.register_blueprint(edus)
