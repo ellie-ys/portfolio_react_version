@@ -10,7 +10,7 @@ from models.project import Project
 from PIL import Image
 from base64 import b64encode
 import os
-import io
+from io import BytesIO
 
 
 
@@ -31,7 +31,7 @@ def get_portfolio():
 
   if profiles.image:
     profile_image = Image.open(os.path.join(current_app.config['UPLOAD_DIR'], 'media', profiles.image))
-    buffered = io.BytesIO()
+    buffered = BytesIO()
     profile_image.save(buffered, format=profile_image.format)
     profile_image_bytes = buffered.getvalue()
     profile_image_base64 = b64encode(profile_image_bytes)
