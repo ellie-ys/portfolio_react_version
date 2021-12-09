@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Navi, Main, Network, Login, Register } from "./portfolio/components";
+import { Navi, Main, Network, Login, Register } from "portfolio/components";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import store from "redux/store";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-import RegisterForm from "./RegisterForm";
+import RegisterForm from "portfolio/register/RegisterForm";
 
 const Register = () => {
   return (

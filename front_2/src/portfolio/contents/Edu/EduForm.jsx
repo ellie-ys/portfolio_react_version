@@ -32,7 +32,7 @@ const EduForm = (props) => {
             id: props.formId,
             name: edu,
             major: major,
-            type: type,
+            edu_type: type,
             user_id: props.formUserId,
           }
         : item

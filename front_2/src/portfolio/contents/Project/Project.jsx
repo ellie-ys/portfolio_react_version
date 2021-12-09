@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import axios from "axios";
-import ProjectContents from "./ProjectContents";
-import ProjectForm from "./ProjectForm";
-import { BACKEND_URL } from "../../../utils/env";
+import ProjectContents from "portfolio/contents/Project/ProjectContents";
+import ProjectForm from "portfolio/contents/Project/ProjectForm";
+import { BACKEND_URL } from "utils/env";
 import moment from "moment";
 
 const ProjectStyle = styled.div`

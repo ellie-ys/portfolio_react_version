@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import axios from "axios";
-import CertificateContents from "./CertificateContents";
-import CertificateForm from "./CertificateForm";
-import { BACKEND_URL } from "../../../utils/env";
+import CertificateContents from "portfolio/contents/Certificate/CertificateContents";
+import CertificateForm from "portfolio/contents/Certificate/CertificateForm";
+import { BACKEND_URL } from "utils/env";
+
 import moment from "moment";
 
 const CertificateStyle = styled.div`

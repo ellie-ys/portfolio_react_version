@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import axios from "axios";
-import AwardContents from "./AwardContents";
-import AwardForm from "./AwardForm";
-import { BACKEND_URL } from "../../../utils/env";
+import AwardContents from "portfolio/contents/Award/AwardContents";
+import AwardForm from "portfolio/contents/Award/AwardForm";
+import { BACKEND_URL } from "utils/env";
 
 const AwardStyle = styled.div`
   border: solid 3px grey;

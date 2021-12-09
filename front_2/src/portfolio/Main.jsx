@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Award, Certificate, Education, Profile, Project } from "./Contents";
+import {
+  Award,
+  Certificate,
+  Education,
+  Profile,
+  Project,
+} from "portfolio/contents/Contents";
 import Footer from "./Footer.jsx";
 import styled from "styled-components";
 import axios from "axios";
-import { BACKEND_URL } from "../utils/env";
+import { BACKEND_URL } from "utils/env";
 
 const MainStyle = styled.div`
   display: flex;

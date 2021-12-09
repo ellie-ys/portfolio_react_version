@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { login } from "../../redux/action";
-import { BACKEND_URL } from "../../utils/env";
+import { login } from "redux/action";
+import { BACKEND_URL } from "utils/env";
+
 import axios from "axios";
 
 const LoginForm = () => {
@@ -16,7 +17,7 @@ const LoginForm = () => {
       const response = await axios.post(BACKEND_URL + "/login", {
         email: email,
         password: password,
-        type: 1,
+        user_type: 1,
       });
 
       dispatch(
@@ -26,9 +27,9 @@ const LoginForm = () => {
           response.data.user_id
         )
       );
-      history.push("/main");
+      history.push(`/main?user=${response.data.user_id}`);
     } catch (error) {
-      alert(error.response);
+      console.log(error.response);
     }
   };
 

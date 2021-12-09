@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import axios from "axios";
-import { BACKEND_URL } from "../../../utils/env";
-import EduContents from "./EduContents";
-import EduForm from "./EduForm";
+import { BACKEND_URL } from "utils/env";
+import EduContents from "portfolio/contents/Edu/EduContents";
+import EduForm from "portfolio/contents/Edu/EduForm";
 
 const EduStyle = styled.div`
   border: solid 3px grey;
@@ -72,7 +72,7 @@ const Education = (props) => {
       id: newIndex,
       name: "",
       major: "",
-      type: "",
+      edu_type: "",
       user_id: props.userId,
     });
     setNewIndex(newIndex - 1);
@@ -91,7 +91,7 @@ const Education = (props) => {
                 formId={element.id}
                 formName={element.name}
                 formMajor={element.major}
-                formType={element.type}
+                formType={element.edu_type}
                 formUserId={element.user_id}
                 eduData={props.eduData}
                 setEduData={props.setEduData}
@@ -116,10 +116,11 @@ const Education = (props) => {
                 eduId={element.id}
                 eduName={element.name}
                 eduMajor={element.major}
-                eduType={element.type}
+                eduType={element.edu_type}
               />
             );
           })}
+
           <EduButtonWrapper>
             {user_id === props.userId && (
               <button onClick={editTriggerHandler}> Edit </button>

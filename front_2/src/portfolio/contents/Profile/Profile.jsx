@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import axios from "axios";
-import { BACKEND_URL } from "../../../utils/env";
+import { BACKEND_URL } from "utils/env";
 
 const ProfileStyle = styled.div`
   border: solid 3px grey;
