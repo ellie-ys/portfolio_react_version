@@ -58,7 +58,7 @@ def login():
         user_info = {'id': user.id, 'name': user.name, 'email': user.email, 'type': user.type}
         access_token = create_access_token(identity=user_info)
         refresh_token = create_refresh_token(identity=user_info)
-        return jsonify(access_token=access_token, refresh_token=refresh_token), 200
+        return jsonify(access_token=access_token, refresh_token=refresh_token, user_id=user.id), 200
 
     
     return jsonify({"error_message":"Login Failed"}), 400
