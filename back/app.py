@@ -37,7 +37,7 @@ def create_app():
     migrate = Migrate()
     migrate.init_app(app, db, compare_type=True)
 
-    from models import user, award, education, project, certificate
+    from models import user, award, education, project, certificate, token
     
     app.config['UPLOAD_DIR'] = os.getcwd()
 

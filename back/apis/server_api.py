@@ -19,13 +19,15 @@ def network():
 def register():
     email = request.json.get('email', None)
     password = request.json.get('password', None)
+    password_check = request.json.get('password_check', None)
     name = request.json.get('name', None)
     user_type = request.json.get('user_type', None)
     
-    if email == None or password == None or name == None or user_type == None:
+    if email == None or password == None or password_check == None or name == None or user_type == None:
         return jsonify(message = "invalid parameter"), 400
 
-
+    if password != password_check:
+        return jsonify(message = "password check is not correct"), 400
     
     user = User.query.filter_by(email=email, user_type=user_type).first()
     if user:
@@ -53,13 +55,38 @@ def login():
     if not user:
         return jsonify({"error_message":"User Not Found"}), 400
 
-    if bcrypt.check_password_hash(user.password, password):
-        user_info = {'id': user.id, 'name': user.name, 'email': user.email, 'user_type': user.user_type}
-        access_token = create_access_token(identity=user_info)
-        refresh_token = create_refresh_token(identity=user_info)
-        return jsonify(access_token=access_token, refresh_token=refresh_token, user_id=user.id), 200
+    if not bcrypt.check_password_hash(user.password, password):
+        return jsonify ({"error_message":"Login Failed"}), 400
 
+    user_info = {'id': user.id, 'name': user.name, 'email': user.email, 'user_type': user.user_type}
+    access_token = create_access_token(identity=user_info)
+    refresh_token = create_refresh_token(identity=user_info)
     
-    return jsonify({"error_message":"Login Failed"}), 400
 
+
+    target_token = Token.query.filter_by(user_id= user.id).first() 
+
+    if target_token:
+        target_token.token = refresh_token
+    else:
+        new_token = Token(user_id = user.id, token = refresh_token)
+        db.session.add(new_token)
+    db.session.commit()
+
+    return jsonify(access_token= access_token, refresh_token= refresh_token, user_id = user.id), 200
+
+@serverbp.route('/refresh/token', methods=['POST'])
+def refresh_expired_token():
+
+    user_id = request.json.get('user_id', None)
+    if user_id == None:
+        return jsonify(message="Not found User"), 400
+    
+    refresh_token = Token.query.filter_by(user_id=user_id).first().token
+    try:
+        identity = decode_token(refresh_token)["sub"]
+        access_token = create_access_token(identity=identity)
+        return jsonify(access_token=access_token), 200
+    except:
+        return jsonify(message = "Please login again"), 401
 
