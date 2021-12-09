@@ -30,6 +30,7 @@ const Award = (props) => {
   const [deleteList, setDeleteList] = useState([]);
 
   const access_token = useSelector((state) => state.user.access_token);
+  const user_id = useSelector((state) => state.user.user_id);
 
   const header = {
     headers: {
@@ -119,7 +120,9 @@ const Award = (props) => {
             );
           })}
           <AwardButtonWrapper>
-            <button onClick={editTriggerHandler}> Edit </button>
+            {user_id === props.userId && (
+              <button onClick={editTriggerHandler}> Edit </button>
+            )}
           </AwardButtonWrapper>
         </div>
       )}

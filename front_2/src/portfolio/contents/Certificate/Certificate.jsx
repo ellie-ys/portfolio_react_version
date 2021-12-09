@@ -35,7 +35,7 @@ const Certificate = (props) => {
   const [deleteList, setDeleteList] = useState([]);
 
   const access_token = useSelector((state) => state.user.access_token);
-
+  const user_id = useSelector((state) => state.user.user_id);
   const header = {
     headers: {
       "Content-Type": "application/json",
@@ -127,7 +127,9 @@ const Certificate = (props) => {
             );
           })}
           <CertificateButtonWrapper>
-            <button onClick={editTriggerHandler}> Edit </button>
+            {user_id === props.userId && (
+              <button onClick={editTriggerHandler}> Edit </button>
+            )}
           </CertificateButtonWrapper>
         </div>
       )}

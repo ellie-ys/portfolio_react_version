@@ -29,7 +29,7 @@ const Education = (props) => {
   const [newIndex, setNewIndex] = useState(0);
   const [deleteList, setDeleteList] = useState([]);
   const access_token = useSelector((state) => state.user.access_token);
-
+  const user_id = useSelector((state) => state.user.user_id);
   const header = {
     headers: {
       "Content-Type": "application/json",
@@ -121,7 +121,9 @@ const Education = (props) => {
             );
           })}
           <EduButtonWrapper>
-            <button onClick={editTriggerHandler}> Edit </button>
+            {user_id === props.userId && (
+              <button onClick={editTriggerHandler}> Edit </button>
+            )}
           </EduButtonWrapper>
         </div>
       )}
