@@ -1,5 +1,5 @@
 import { createStore } from "redux";
-import { rootReducer } from "./index";
+import { rootReducer } from "redux/index";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 const persistConfig = {
