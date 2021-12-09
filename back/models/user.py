@@ -10,13 +10,13 @@ class User(db.Model):
     name = db.Column(db.String(45), nullable = False)
     description = db.Column(db.String(255))
     image = db.Column(db.String(45))
-    type = db.Column(db.Integer, nullable=False)
+    user_type = db.Column(db.Integer, nullable=False)
     
 
-    def __init__(self, email, password, name, type):
+    def __init__(self, email, password, name, user_type):
         self.email = email
         self.password = password
         self.name = name
-        self.type = type
+        self.user_type = user_type
         
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns if (c.name not in ['email', 'password', 'type'])}
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns if (c.name not in ['email', 'password', 'user_type'])}

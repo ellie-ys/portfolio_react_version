@@ -6,16 +6,16 @@ class Education(db.Model):
     __tablename__ = 'education'
 
     id = db.Column(db.Integer, primary_key=True, nullable=False) 
-    school = db.Column(db.String(45), nullable = False)
+    name = db.Column(db.String(45), nullable = False)
     major = db.Column(db.String(45),  nullable = False)
-    type = db.Column(db.String(45), nullable = False)
+    edu_type = db.Column(db.String(45), nullable = False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE", onupdate="CASCADE"), nullable=False)
-    user_education = relationship("User", backref = backref("education", order_by = id))
+    user_edu = relationship("User", backref = backref("education", order_by = id))
 
-    def __init__(self, school, major, degree, user_id):
-        self.school = school
+    def __init__(self, name, major, edu_type, user_id):
+        self.name = name
         self.major = major
-        self.type = type
+        self.edu_type = edu_type
         self.user_id = user_id
 
     def as_dict(self):
