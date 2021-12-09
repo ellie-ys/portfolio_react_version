@@ -13,14 +13,14 @@ def put_edu():
   
   for edu in edu_data:
     if edu['id'] <= 0 :
-      newEdu = Education(edu['name'], edu['major'], edu['type'], edu['user_id'])
+      newEdu = Education(edu['name'], edu['major'], edu['edu_type'], edu['user_id'])
       db.session.add(newEdu)
       db.session.commit()
     else: 
       target_edu = Education.query.filter_by(id=edu['id']).first()
       target_edu.name = edu['name']
       target_edu.major = edu['major']
-      target_edu.type = edu['type']
+      target_edu.edu_type = edu['edu_type']
       db.session.commit()
 
   user_info = get_jwt_identity()  
