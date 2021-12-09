@@ -13,7 +13,7 @@ function App() {
       <PersistGate loading={null} persistor={persistor}>
         <Router>
           <Navi />
-          <Route path="/" exact>
+          <Route path="/main" exact>
             <Main />
           </Route>
           <Route path="/network">

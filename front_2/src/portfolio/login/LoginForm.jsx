@@ -19,8 +19,14 @@ const LoginForm = () => {
         type: 1,
       });
 
-      dispatch(login(response.data.access_token));
-      history.push("/");
+      dispatch(
+        login(
+          response.data.access_token,
+          response.data.refresh_token,
+          response.data.user_id
+        )
+      );
+      history.push("/main");
     } catch (error) {
       alert(error.response);
     }
