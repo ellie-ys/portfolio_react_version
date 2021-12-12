@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Award,
   Certificate,
@@ -11,6 +11,9 @@ import Footer from "./Footer.jsx";
 import styled from "styled-components";
 import axios from "axios";
 import { BACKEND_URL } from "utils/env";
+import { header } from "utils/header";
+import { useHistory } from "react-router-dom";
+import { logout, refresh } from "redux/action";
 
 const MainStyle = styled.div`
   display: flex;
@@ -24,37 +27,85 @@ const Main = () => {
   const access_token = useSelector((state) => state.user.access_token);
 
   const user_id = useSelector((state) => state.user.user_id);
-  const queryParams = new URLSearchParams(window.location.search);
-  const post_id = queryParams.get("user");
+  const isLogined = useSelector((state) => state.user.isLogined);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-  const header = {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${access_token}`,
-    },
-  };
-
-  const [userId, setUserId] = useState();
-  const [profileData, setProfileData] = useState({});
-  const [eduData, setEduData] = useState([]);
-  const [awardData, setAwardData] = useState([]);
-  const [projectData, setProjectData] = useState([]);
-  const [certificateData, setCertificateData] = useState([]);
   const [isFetched, setIsFetched] = useState(false);
+  const [portfolios, setPortfolios] = useState({
+    userId: null,
+    profileData: [],
+    eduData: [],
+    awardData: [],
+    projectData: [],
+    certificateData: [],
+  });
 
   useEffect(async () => {
-    const response = await axios.get(
-      BACKEND_URL + `/posts?user=${post_id}`,
-      header
-    );
-    setUserId(response.data.user_id);
-    setProfileData(response.data.profile);
-    setEduData(response.data.edus);
-    setAwardData(response.data.awards);
-    setProjectData(response.data.projects);
-    setCertificateData(response.data.certificates);
-    setIsFetched(true);
-    console.log("Main Called !");
+    if (!isLogined) {
+      history.push("/login");
+    } else {
+      try {
+        const response = await axios.get(
+          BACKEND_URL + `/posts?user=${user_id}`,
+          header(access_token)
+        );
+        const {
+          user_id: userId,
+          profile,
+          edus,
+          awards,
+          projects,
+          certificates,
+        } = response.data;
+        setPortfolios({
+          userId: userId,
+          profileData: profile,
+          eduData: edus,
+          awardData: awards,
+          projectData: projects,
+          certificateData: certificates,
+        });
+        setIsFetched(true);
+      } catch (error) {
+        if (error.response !== undefined && error.response.status === 401) {
+          console.log("refreshing!");
+          try {
+            const refresh_response = await axios.post(
+              BACKEND_URL + `/refresh/token`,
+              { user_id: user_id }
+            );
+            const new_token = refresh_response.data.access_token;
+            dispatch(refresh(new_token));
+            const response = await axios.get(
+              BACKEND_URL + `/posts?user=${user_id}`,
+              header(new_token)
+            );
+            const {
+              user_id: userId,
+              profile,
+              edus,
+              awards,
+              projects,
+              certificates,
+            } = response.data;
+            setPortfolios({
+              userId: userId,
+              profileData: profile,
+              eduData: edus,
+              awardData: awards,
+              projectData: projects,
+              certificateData: certificates,
+            });
+            setIsFetched(true);
+          } catch (err) {
+            alert("로그인 세션이 만료 되었습니다.");
+            dispatch(logout());
+            history.push("/login");
+          }
+        }
+      }
+    }
   }, []);
 
   return (
@@ -63,29 +114,21 @@ const Main = () => {
         {isFetched ? (
           <div>
             <Profile
-              profileData={profileData}
-              setProfileData={setProfileData}
-              userId={userId}
+              profileData={portfolios.profileData}
+              userId={portfolios.userId}
             />
-            <Education
-              eduData={eduData}
-              setEduData={setEduData}
-              userId={userId}
-            />
+            <Edu eduData={portfolios.eduData} userId={portfolios.userId} />
             <Award
-              awardData={awardData}
-              setAwardData={setAwardData}
-              userId={userId}
+              awardData={portfolios.awardData}
+              userId={portfolios.userId}
             />
             <Project
-              projectData={projectData}
-              setProjectData={setProjectData}
-              userId={userId}
+              projectData={portfolios.projectData}
+              userId={portfolios.userId}
             />
             <Certificate
-              certificateData={certificateData}
-              setCertificateData={setCertificateData}
-              userId={userId}
+              certificateData={portfolios.certificateData}
+              userId={portfolios.userId}
             />
           </div>
         ) : (
