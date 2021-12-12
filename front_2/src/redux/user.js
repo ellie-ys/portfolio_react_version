@@ -9,7 +9,6 @@ const user = (state = initState, action) => {
       return {
         ...state,
         access_token: action.access_token,
-        refresh_token: action.refresh_token,
         user_id: action.user_id,
         isLogined: action.isLogined,
       };
@@ -18,7 +17,6 @@ const user = (state = initState, action) => {
       return {
         ...state,
         access_token: action.access_token,
-        refresh_token: action.refresh_token,
         user_id: action.user_id,
         isLogined: action.isLogined,
       };
