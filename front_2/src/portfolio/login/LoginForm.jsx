@@ -27,14 +27,8 @@ const LoginForm = () => {
         user_type: 1,
       });
 
-      dispatch(
-        login(
-          response.data.access_token,
-          response.data.refresh_token,
-          response.data.user_id
-        )
-      );
-      history.push(`/main?user=${response.data.user_id}`);
+    dispatch(login(response.data.access_token, response.data.user_id));
+    history.push(`/main`);
     } catch (error) {
       console.log(error.response);
     }
