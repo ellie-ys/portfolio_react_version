@@ -5,6 +5,13 @@ import { login } from "redux/action";
 import { BACKEND_URL } from "utils/env";
 
 import axios from "axios";
+import styled from "styled-components";
+
+const LoginFormStyle = styled.div`
+  width: 80%;
+  margin: 0 auto;
+  border: solid 2px blue;
+`;
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -34,7 +41,7 @@ const LoginForm = () => {
   };
 
   return (
-    <>
+    <LoginFormStyle>
       <form>
         <p>Email</p>
         <input
@@ -52,7 +59,7 @@ const LoginForm = () => {
       <button type="submit" onClick={loginHandler}>
         Login
       </button>
-    </>
+    </LoginFormStyle>
   );
 };
 
