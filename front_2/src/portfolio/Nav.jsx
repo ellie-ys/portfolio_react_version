@@ -7,7 +7,7 @@ import { logout } from "redux/action";
 
 const Navi = (props) => {
   const dispatch = useDispatch();
-  const isLogin = useSelector((state) => state.user.isLoggedIn);
+  const isLogin = useSelector((state) => state.user.isLogined);
   const user_id = useSelector((state) => state.user.user_id);
 
   const logoutHandler = () => {
@@ -21,14 +21,14 @@ const Navi = (props) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link to={`/main?user=${user_id}`} className="nav-link">
+            <Link to="/main" className="nav-link">
               Main
             </Link>
             <Link to="/network" className="nav-link">
               Network
             </Link>
             {isLogin ? (
-              <Link to="/" className="nav-link" onClick={logoutHandler}>
+              <Link to="/login" className="nav-link" onClick={logoutHandler}>
                 Logout
               </Link>
             ) : (
