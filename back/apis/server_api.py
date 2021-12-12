@@ -76,7 +76,7 @@ def login():
         db.session.add(new_token)
     db.session.commit()
 
-    return jsonify(access_token= access_token, refresh_token= refresh_token, user_id = user.id), 200
+    return jsonify(access_token=access_token, user_id=user.id), 200
 
 @serverbp.route('/refresh/token', methods=['POST'])
 def refresh_expired_token():
