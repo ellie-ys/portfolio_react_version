@@ -5,6 +5,9 @@ import axios from "axios";
 import { BACKEND_URL } from "utils/env";
 import EduContents from "portfolio/contents/Edu/EduContents";
 import EduForm from "portfolio/contents/Edu/EduForm";
+import { useDispatch } from "react-redux";
+import { logout, refresh } from "redux/action";
+import { useHistory } from "react-router";
 
 const EduStyle = styled.div`
   border: solid 3px grey;
@@ -30,12 +33,8 @@ const Education = (props) => {
   const [deleteList, setDeleteList] = useState([]);
   const access_token = useSelector((state) => state.user.access_token);
   const user_id = useSelector((state) => state.user.user_id);
-  const header = {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${access_token}`,
-    },
-  };
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const editTriggerHandler = () => {
     setCopyEduData(props.eduData);
@@ -50,21 +49,51 @@ const Education = (props) => {
   };
 
   const editCompleteHandler = async () => {
-    const deleteResponse = await axios.post(
-      BACKEND_URL + "/edus/delete",
-      deleteList.filter((item) => item > 0),
-      header
-    );
-    const response = await axios.put(
-      BACKEND_URL + "/edus",
-      props.eduData,
-      header
-    );
-    console.log(response.data);
-    props.setEduData(response.data);
-    setEdit(false);
-    setNewIndex(0);
-    setDeleteList([]);
+    try {
+      const deleteResponse = await axios.post(
+        BACKEND_URL + "/edus/delete",
+        deleteList.filter((item) => item > 0),
+        header(access_token)
+      );
+      const response = await axios.put(
+        BACKEND_URL + "/edus",
+        eduData,
+        header(access_token)
+      );
+      setEduData(response.data);
+      setEdit(false);
+      setNewIndex(0);
+      setDeleteList([]);
+    } catch (error) {
+      if (error.response !== undefined && error.response.status === 401) {
+        try {
+          const refresh_response = await axios.post(
+            BACKEND_URL + `/refresh/token`,
+            { user_id: user_id }
+          );
+          const new_token = refresh_response.data.access_token;
+          dispatch(refresh(new_token));
+          const deleteResponse = await axios.post(
+            BACKEND_URL + "/edus/delete",
+            deleteList.filter((item) => item > 0),
+            header(new_token)
+          );
+          const response = await axios.put(
+            BACKEND_URL + "/edus",
+            eduData,
+            header(new_token)
+          );
+          setEduData(response.data);
+          setEdit(false);
+          setNewIndex(0);
+          setDeleteList([]);
+        } catch (err) {
+          alert("로그인 세션이 만료 되었습니다.");
+          dispatch(logout());
+          history.push("/login");
+        }
+      }
+    }
   };
 
   const addEduDataHandler = () => {

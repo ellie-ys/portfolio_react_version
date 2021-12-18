@@ -5,7 +5,9 @@ import axios from "axios";
 import AwardContents from "portfolio/contents/Award/AwardContents";
 import AwardForm from "portfolio/contents/Award/AwardForm";
 import { BACKEND_URL } from "utils/env";
-
+import { useDispatch } from "react-redux";
+import { logout, refresh } from "redux/action";
+import { useHistory } from "react-router";
 
 const AwardStyle = styled.div`
   border: solid 3px grey;
@@ -34,7 +36,8 @@ const Award = (props) => {
   const user_id = useSelector((state) => state.user.user_id);
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const editTriggerHandler = () => {
     setCopyAwardData(props.awardData);
@@ -49,21 +52,51 @@ const Award = (props) => {
   };
 
   const editCompleteHandler = async () => {
-    const deleteResponse = await axios.post(
-      BACKEND_URL + "/awards/delete",
-      deleteList.filter((item) => item > 0),
-      header
-    );
-    const response = await axios.put(
-      BACKEND_URL + "/awards",
-      props.awardData,
-      header
-    );
-    console.log(response.data);
-    props.setAwardData(response.data);
-    setEdit(false);
-    setNewIndex(0);
-    setDeleteList([]);
+    try {
+      const deleteResponse = await axios.post(
+        BACKEND_URL + "/awards/delete",
+        deleteList.filter((item) => item > 0),
+        header(access_token)
+      );
+      const response = await axios.put(
+        BACKEND_URL + "/awards",
+        awardData,
+        header(access_token)
+      );
+      setAwardData(response.data);
+      setEdit(false);
+      setNewIndex(0);
+      setDeleteList([]);
+    } catch (error) {
+      if (error.response !== undefined && error.response.status === 401) {
+        try {
+          const refresh_response = await axios.post(
+            BACKEND_URL + `/refresh/token`,
+            { user_id: user_id }
+          );
+          const new_token = refresh_response.data.access_token;
+          dispatch(refresh(new_token));
+          const deleteResponse = await axios.post(
+            BACKEND_URL + "/awards/delete",
+            deleteList.filter((item) => item > 0),
+            header(new_token)
+          );
+          const response = await axios.put(
+            BACKEND_URL + "/awards",
+            awardData,
+            header(new_token)
+          );
+          setAwardData(response.data);
+          setEdit(false);
+          setNewIndex(0);
+          setDeleteList([]);
+        } catch (err) {
+          alert("로그인 세션이 만료 되었습니다.");
+          dispatch(logout());
+          history.push("/login");
+        }
+      }
+    }
   };
 
   const addAwardDataHandler = () => {
