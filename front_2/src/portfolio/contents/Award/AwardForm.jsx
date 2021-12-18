@@ -13,13 +13,6 @@ const AwardForm = (props) => {
   const [award, setAward] = useState(props.formName);
   const [description, setDescription] = useState(props.formDescription);
 
-  const changeNameHandler = (e) => {
-    setAward(e.target.value);
-  };
-
-  const changeDescriptionHandler = (e) => {
-    setDescription(e.target.value);
-  };
   useEffect(() => {
     const newAwardData = props.awardData.map((item) =>
       item.id === props.formId
@@ -51,7 +44,7 @@ const AwardForm = (props) => {
           type="text"
           placeholder="상 이름"
           value={award}
-          onChange={changeNameHandler}
+          onChange={(e) => setAward(e.target.value)}
         />
       </div>
       <div>
@@ -59,7 +52,7 @@ const AwardForm = (props) => {
           type="text"
           placeholder="내용"
           value={description}
-          onChange={changeDescriptionHandler}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </div>
       <button onClick={deleteHandler}> 삭제 </button>

@@ -27,26 +27,6 @@ const ProjectForm = (props) => {
   const [enddate, setEnddate] = useState(props.formEnddate);
   const [url, setUrl] = useState(props.formUrl);
 
-  const changeNameHandler = (e) => {
-    setProject(e.target.value);
-  };
-
-  const changeDescriptionHandler = (e) => {
-    setDescription(e.target.value);
-  };
-
-  const changeStartdateHandler = (date) => {
-    setStartdate(moment(date).format("YYYY-MM-DD"));
-    const newProjectData = props.projectData.map((item) =>
-      item.id === props.formId ? { ...item, startdate: date } : item
-    );
-    props.setProjectData(newProjectData);
-  };
-
-  const changeEnddateHandler = (date) => {
-    setEnddate(moment(date).format("YYYY-MM-DD"));
-  };
-
   const changeUrlHandler = (e) => {
     setUrl(e.target.value);
   };
@@ -91,7 +71,7 @@ const ProjectForm = (props) => {
           type="text"
           placeholder="프로젝트명"
           value={project}
-          onChange={changeNameHandler}
+          onChange={(e) => setProject(e.target.value)}
         />
       </InnerFormStyle>
       <InnerFormStyle>
@@ -99,7 +79,7 @@ const ProjectForm = (props) => {
           type="text"
           placeholder="프로젝트 내용"
           value={description}
-          onChange={changeDescriptionHandler}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </InnerFormStyle>
       <InnerFormStyle>
@@ -108,7 +88,7 @@ const ProjectForm = (props) => {
           <DatePicker
             dateFormat="yyyy-MM-dd"
             selected={formattedDate(startdate)}
-            onChange={changeStartdateHandler}
+            onChange={(date) => setStartdate(moment(date).format("YYYY-MM-DD"))}
           />
         </DatePickerStyle>{" "}
         ~
@@ -116,7 +96,7 @@ const ProjectForm = (props) => {
           <DatePicker
             dateFormat="yyyy-MM-dd"
             selected={formattedDate(enddate)}
-            onChange={changeEnddateHandler}
+            onChange={(date) => setEnddate(moment(date).format("YYYY-MM-DD"))}
           />
         </DatePickerStyle>
       </InnerFormStyle>
@@ -125,7 +105,7 @@ const ProjectForm = (props) => {
           type="text"
           placeholder="프로젝트 주소"
           value={url}
-          onChange={changeUrlHandler}
+          onChange={(e) => setUrl(e.target.value)}
         />
       </InnerFormStyle>
       <button onClick={deleteHandler}> Delete </button>

@@ -25,18 +25,6 @@ const CertificateForm = (props) => {
   const [agency, setAgency] = useState(props.formAgency);
   const [date, setDate] = useState(props.formDate);
 
-  const changeNameHandler = (e) => {
-    setCertificate(e.target.value);
-  };
-
-  const changeAgencyHandler = (e) => {
-    setAgency(e.target.value);
-  };
-
-  const changeDateHandler = (date) => {
-    setDate(moment(date).format("YYYY-MM-DD"));
-  };
-
   useEffect(() => {
     const newCertificateData = props.certificateData.map((item) =>
       item.id === props.formId
@@ -76,7 +64,7 @@ const CertificateForm = (props) => {
           type="text"
           placeholder="자격증"
           value={certificate}
-          onChange={changeNameHandler}
+          onChange={(e) => setCertificate(e.target.value)}
         />
       </InnerFormStyle>
       <InnerFormStyle>
@@ -84,7 +72,7 @@ const CertificateForm = (props) => {
           type="text"
           placeholder="발급 기관"
           value={agency}
-          onChange={changeAgencyHandler}
+          onChange={(e) => setAgency(e.target.value)}
         />
       </InnerFormStyle>
       <InnerFormStyle>
@@ -93,7 +81,7 @@ const CertificateForm = (props) => {
           <DatePicker
             dateFormat="yyyy-MM-dd"
             selected={formattedDate(date)}
-            onChange={changeDateHandler}
+            onChange={(date) => setDate(moment(date).format("YYYY-MM-DD"))}
           />
         </DatePickerStyle>
       </InnerFormStyle>

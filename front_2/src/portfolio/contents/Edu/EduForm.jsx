@@ -14,17 +14,6 @@ const EduForm = (props) => {
   const [major, setMajor] = useState(props.formMajor);
   const [type, setType] = useState(props.formType);
 
-  const changeNameHandler = (e) => {
-    setEdu(e.target.value);
-  };
-
-  const changeMajorHandler = (e) => {
-    setMajor(e.target.value);
-  };
-
-  const changeTypeHandler = (e) => {
-    setType(e.target.value);
-  };
   useEffect(() => {
     const newEduData = props.eduData.map((item) =>
       item.id === props.formId
@@ -55,7 +44,7 @@ const EduForm = (props) => {
           type="text"
           placeholder="학교"
           value={edu}
-          onChange={changeNameHandler}
+          onChange={(e) => setEdu(e.target.value)}
         />
       </div>
       <div>
@@ -63,7 +52,7 @@ const EduForm = (props) => {
           type="text"
           placeholder="전공"
           value={major}
-          onChange={changeMajorHandler}
+          onChange={(e) => setMajor(e.target.value)}
         />
       </div>
       <div>
@@ -73,7 +62,7 @@ const EduForm = (props) => {
             name={props.formId}
             type="radio"
             value="재학"
-            onChange={changeTypeHandler}
+            onChange={(e) => setType(e.target.value)}
             checked={type === "재학"}
           />{" "}
           재학{" "}
@@ -84,7 +73,7 @@ const EduForm = (props) => {
             name={props.formId}
             type="radio"
             value="졸업"
-            onChange={changeTypeHandler}
+            onChange={(e) => setType(e.target.value)}
             checked={type === "졸업"}
           />{" "}
           졸업{" "}
@@ -95,7 +84,7 @@ const EduForm = (props) => {
             name={props.formId}
             type="radio"
             value="졸업예정"
-            onChange={changeTypeHandler}
+            onChange={(e) => setType(e.target.value)}
             checked={type === "졸업예정"}
           />{" "}
           졸업예정{" "}
@@ -106,7 +95,7 @@ const EduForm = (props) => {
             name={props.formId}
             type="radio"
             value="중퇴"
-            onChange={changeTypeHandler}
+            onChange={(e) => setType(e.target.value)}
             checked={type === "중퇴"}
           />{" "}
           중퇴{" "}
