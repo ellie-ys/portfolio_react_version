@@ -24,3 +24,79 @@ export const nameRegex = (name) => {
 
   return reg.test(name);
 };
+
+export const eduDataValidation = (eduData) => {
+  let result = true;
+  eduData.forEach((element) => {
+    if (element.name === "") {
+      result = false;
+      return;
+    }
+    if (element.major === "") {
+      result = false;
+      return;
+    }
+    if (element.edu_type === "") {
+      result = false;
+      return;
+    }
+  });
+  return result;
+};
+
+export const awardDataValidation = (awardData) => {
+  let result = true;
+  awardData.forEach((element) => {
+    if (element.name === "") {
+      result = false;
+      return;
+    }
+    if (element.description === "") {
+      result = false;
+      return;
+    }
+  });
+  return result;
+};
+
+export const certificateDataValidation = (certificateData) => {
+  let result = true;
+  certificateData.forEach((element) => {
+    if (element.name === "") {
+      result = false;
+      return;
+    }
+    if (element.agency === "") {
+      result = false;
+      return;
+    }
+    if (element.date === "") {
+      result = false;
+      return;
+    }
+  });
+  return result;
+};
+
+export const projectDataValidation = (projectData) => {
+  let result = true;
+  projectData.forEach((element) => {
+    if (element.name === "") {
+      result = false;
+      return;
+    }
+    if (element.description === "") {
+      result = false;
+      return;
+    }
+    if (element.startdate === "") {
+      result = false;
+      return;
+    }
+    if (element.enddate === "") {
+      result = false;
+      return;
+    }
+  });
+  return result;
+};
