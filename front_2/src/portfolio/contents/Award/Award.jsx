@@ -6,6 +6,7 @@ import AwardContents from "portfolio/contents/Award/AwardContents";
 import AwardForm from "portfolio/contents/Award/AwardForm";
 import { BACKEND_URL } from "utils/env";
 
+
 const AwardStyle = styled.div`
   border: solid 3px grey;
   display: flex;
@@ -31,13 +32,9 @@ const Award = (props) => {
 
   const access_token = useSelector((state) => state.user.access_token);
   const user_id = useSelector((state) => state.user.user_id);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  const header = {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${access_token}`,
-    },
-  };
 
   const editTriggerHandler = () => {
     setCopyAwardData(props.awardData);
