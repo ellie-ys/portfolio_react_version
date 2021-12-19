@@ -38,6 +38,7 @@ const Network = () => {
   const [isFetched, setIsFetched] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
   const [searchBar, setSearchBar] = useState("");
+  const [noResult, setNoResult] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -80,41 +81,61 @@ const Network = () => {
     }
   }, []);
 
-  const searchBarHandler = (e) => {
-    setSearchBar(e.target.value);
+  const searchSubmitHandler = () => {
+    if (searchBar.length < 2) {
+      alert("검색어는 최소 2글자 이상 입력해야 합니다.");
+    } else {
+      setSearchResult(
+        portfolios.filter((element) => element.name.indexOf(searchBar) >= 0)
+      );
+      setSearchBar("");
+    }
   };
 
-  const searchSubmitHandler = () => {
-    setSearchResult(
-      portfolios.filter((element) => element.name.indexOf(searchBar) >= 0)
-    );
+  const searchAllHandler = () => {
+    setSearchResult(portfolios);
   };
 
   const contentClickHandler = (id) => {
     history.push(`/posts/${id}`);
   };
+  useEffect(() => {
+    if (searchResult.length === 0) {
+      setNoResult(true);
+    } else {
+      setNoResult(false);
+    }
+  }, [searchResult]);
 
   return (
     <div>
       {isFetched ? (
         <NetworkStyle>
           <div>
-            <input type="text" value={searchBar} onChange={searchBarHandler} />
+            <input
+              type="text"
+              value={searchBar}
+              onChange={(e) => setSearchBar(e.target.value)}
+            />
             <button onClick={searchSubmitHandler}> 검색 </button>
             <button onClick={searchAllHandler}> 전체보기 </button>
           </div>
           <NetworkContentWrapper>
-            {searchResult.map((element) => {
-              return (
-                <NetworkContentStyle
-                  key={element.id}
-                  onClick={() => contentClickHandler(element.id)}
-                >
-                  <div>{element.name}</div>
-                  <div>{element.description}</div>
-                </NetworkContentStyle>
-              );
-            })}
+            {noResult ? (
+              <p> 검색 결과가 없습니다. </p>
+            ) : (
+              searchResult.map((element) => {
+                return (
+                  <NetworkContentStyle
+                    key={element.id}
+                    onClick={() => contentClickHandler(element.id)}
+                  >
+                    <div>{element.name}</div>
+                    <div>{element.description}</div>
+                  </NetworkContentStyle>
+                );
+              })
+            )}
           </NetworkContentWrapper>
         </NetworkStyle>
       ) : (
