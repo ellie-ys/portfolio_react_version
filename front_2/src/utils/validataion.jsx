@@ -28,15 +28,11 @@ export const nameRegex = (name) => {
 export const eduDataValidation = (eduData) => {
   let result = true;
   eduData.forEach((element) => {
-    if (element.name === "") {
-      result = false;
-      return;
-    }
-    if (element.major === "") {
-      result = false;
-      return;
-    }
-    if (element.edu_type === "") {
+    if (
+      element.name === "" ||
+      element.major === "" ||
+      element.edu_type === ""
+    ) {
       result = false;
       return;
     }
@@ -47,11 +43,7 @@ export const eduDataValidation = (eduData) => {
 export const awardDataValidation = (awardData) => {
   let result = true;
   awardData.forEach((element) => {
-    if (element.name === "") {
-      result = false;
-      return;
-    }
-    if (element.description === "") {
+    if (element.name === "" || element.description === "") {
       result = false;
       return;
     }
@@ -62,15 +54,7 @@ export const awardDataValidation = (awardData) => {
 export const certificateDataValidation = (certificateData) => {
   let result = true;
   certificateData.forEach((element) => {
-    if (element.name === "") {
-      result = false;
-      return;
-    }
-    if (element.agency === "") {
-      result = false;
-      return;
-    }
-    if (element.date === "") {
+    if (element.name === "" || element.agency === "" || element.date === "") {
       result = false;
       return;
     }
@@ -81,19 +65,13 @@ export const certificateDataValidation = (certificateData) => {
 export const projectDataValidation = (projectData) => {
   let result = true;
   projectData.forEach((element) => {
-    if (element.name === "") {
-      result = false;
-      return;
-    }
-    if (element.description === "") {
-      result = false;
-      return;
-    }
-    if (element.startdate === "") {
-      result = false;
-      return;
-    }
-    if (element.enddate === "") {
+    if (
+      element.name === "" ||
+      element.description === "" ||
+      element.startdate === "" ||
+      element.enddate === "" ||
+      element.url === ""
+    ) {
       result = false;
       return;
     }

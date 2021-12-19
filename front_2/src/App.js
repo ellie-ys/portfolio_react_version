@@ -7,7 +7,7 @@ import {
   Login,
   Register,
   Posts,
-} from "portfolio/components";
+} from "./portfolio/components";
 import { Provider } from "react-redux";
 import store from "redux/store";
 import { persistStore } from "redux-persist";
