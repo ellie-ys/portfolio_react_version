@@ -1,6 +1,6 @@
-export { default as Main } from "portfolio/Main";
-export { default as NavComponent } from "portfolio/Nav";
-export { default as Network } from "portfolio/Network";
-export { default as Login } from "portfolio/login/Login";
-export { default as Register } from "portfolio/register/Register";
-export { default as Posts } from "portfolio/Posts";
+export { default as Main } from "./Main";
+export { default as Navi } from "./Nav";
+export { default as Network } from "./Network";
+export { default as Login } from "./login/Login";
+export { default as Register } from "./register/Register";
+export { default as Posts } from "./Posts";

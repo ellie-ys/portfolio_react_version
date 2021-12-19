@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Search from "./Search";
 import axios from "axios";
 import { BACKEND_URL } from "../utils/env";
 import { useSelector, useDispatch } from "react-redux";

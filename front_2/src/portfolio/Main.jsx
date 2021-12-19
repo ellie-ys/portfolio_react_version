@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  Award,
-  Certificate,
-  Education,
-  Profile,
-  Project,
-} from "portfolio/contents/Contents";
+import { Award, Certificate, Education, Profile, Project } from "./Contents";
 import Footer from "./Footer.jsx";
 import styled from "styled-components";
 import axios from "axios";
@@ -117,7 +111,10 @@ const Main = () => {
               profileData={portfolios.profileData}
               userId={portfolios.userId}
             />
-            <Edu eduData={portfolios.eduData} userId={portfolios.userId} />
+            <Education
+              eduData={portfolios.eduData}
+              userId={portfolios.userId}
+            />
             <Award
               awardData={portfolios.awardData}
               userId={portfolios.userId}
