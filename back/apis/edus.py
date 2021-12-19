@@ -12,15 +12,22 @@ def put_edu():
   edu_data = request.get_json()  
   
   for edu in edu_data:
+    name = edu['name']
+    major = edu['major']
+    edu_type = edu['edu_type']
+    user_id = edu['user_id']
+    if not all([name, major, edu_type, user_id]):
+      return jsonify(message = "invalid parameters"), 400
+
     if edu['id'] <= 0 :
-      newEdu = Education(edu['name'], edu['major'], edu['edu_type'], edu['user_id'])
+      newEdu = Education(name, major, edu_type, user_id)
       db.session.add(newEdu)
       db.session.commit()
     else: 
       target_edu = Education.query.filter_by(id=edu['id']).first()
-      target_edu.name = edu['name']
-      target_edu.major = edu['major']
-      target_edu.edu_type = edu['edu_type']
+      target_edu.name = name
+      target_edu.major = major
+      target_edu.edu_type = edu_type
       db.session.commit()
 
   user_info = get_jwt_identity()  

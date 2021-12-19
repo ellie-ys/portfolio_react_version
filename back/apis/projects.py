@@ -7,21 +7,31 @@ projects = Blueprint('projects', __name__, url_prefix='/projects')
 @projects.route('', methods=['PUT'])
 @jwt_required()
 def put_project():
-  
+
     project_data = request.get_json()  
-  
+
     for project in project_data:
+        name = project['name']
+        description = project['description']
+        startdate = project['startdate']
+        enddate = project['enddate']
+        url = project['url']
+        user_id = project['user_id']
+        if not all([name, description, startdate, enddate, url, user_id]):
+            return jsonify(message = "invalid parameters"), 400
+
         if project['id'] <= 0 :
-            newProject = Project(project['name'], project['description'], project['startdate'][:10], project['enddate'][:10], project['url'], project['user_id'])
+            newProject = Project(name, description, startdate, enddate, url, user_id)
             db.session.add(newProject)
             db.session.commit()
         else: 
             target_project = Project.query.filter_by(id=project['id']).first()
-            target_project.name = project['name']
-            target_project.description = project['description']
-            target_project.startdate = project['startdate'][:10]
-            target_project.enddate = project['enddate'][:10]
-            target_project.url = project['url']
+            target_project.name = name
+            target_project.description = description
+            target_project.startdate = startdate
+            target_project.enddate = enddate
+            target_project.url = url
+
             db.session.commit()
 
     user_info = get_jwt_identity()  

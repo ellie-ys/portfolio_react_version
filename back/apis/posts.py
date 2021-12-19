@@ -19,8 +19,12 @@ posts = Blueprint('posts', __name__, url_prefix='/posts')
 @posts.route('', methods=['GET'])
 @jwt_required()
 def get_portfolio():
-  # user_info = get_jwt_identity()
+
   requested_id = int(request.args.get('user'))
+
+  if not requested_id:
+    return jsonify(message = "Not found User"), 400
+
   edus = Education.query.filter_by(user_id = requested_id).all()
   awards = Award.query.filter_by(user_id = requested_id).all()
   projects = Project.query.filter_by(user_id = requested_id).all()

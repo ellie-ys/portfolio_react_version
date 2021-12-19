@@ -12,15 +12,20 @@ def put_certificate():
   certificate_data = request.get_json()  
   
   for certificate in certificate_data:
+    name = certificate['name']
+    agency = certificate['agency']
+    date = certificate['date']
+    user_id = certificate['user_id']
+
     if certificate['id'] <= 0 :
-      newCertificate = Certificate(certificate['name'], certificate['agency'], certificate['date'], certificate['user_id'])
+      newCertificate = Certificate(name, agency, date, user_id)
       db.session.add(newCertificate)
       db.session.commit()
     else: 
       target_certificate = Certificate.query.filter_by(id=certificate['id']).first()
-      target_certificate.name = certificate['name']
-      target_certificate.agency = certificate['agency']
-      target_certificate.date = certificate['date']
+      target_certificate.name = name
+      target_certificate.agency = agency
+      target_certificate.date = date
       db.session.commit()
 
   user_info = get_jwt_identity()  
