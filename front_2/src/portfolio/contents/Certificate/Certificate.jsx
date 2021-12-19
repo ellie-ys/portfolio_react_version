@@ -10,6 +10,7 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 import { logout, refresh } from "redux/action";
 import { useHistory } from "react-router";
+import { certificateDataValidation } from "utils/validation";
 
 const CertificateStyle = styled.div`
   border: solid 3px grey;
@@ -56,48 +57,52 @@ const Certificate = (props) => {
   };
 
   const editCompleteHandler = async () => {
-    try {
-      const deleteResponse = await axios.post(
-        BACKEND_URL + "/certificates/delete",
-        deleteList.filter((item) => item > 0),
-        header(access_token)
-      );
-      const response = await axios.put(
-        BACKEND_URL + "/certificates",
-        certificateData,
-        header(access_token)
-      );
-      setCertificateData(response.data);
-      setEdit(false);
-      setNewIndex(0);
-      setDeleteList([]);
-    } catch (error) {
-      if (error.response !== undefined && error.response.status === 401) {
-        try {
-          const refresh_response = await axios.post(
-            BACKEND_URL + `/refresh/token`,
-            { user_id: user_id }
-          );
-          const new_token = refresh_response.data.access_token;
-          dispatch(refresh(new_token));
-          const deleteResponse = await axios.post(
-            BACKEND_URL + "/certificates/delete",
-            deleteList.filter((item) => item > 0),
-            header(new_token)
-          );
-          const response = await axios.put(
-            BACKEND_URL + "/certificates",
-            certificateData,
-            header(new_token)
-          );
-          setCertificateData(response.data);
-          setEdit(false);
-          setNewIndex(0);
-          setDeleteList([]);
-        } catch (err) {
-          alert("로그인 세션이 만료 되었습니다.");
-          dispatch(logout());
-          history.push("/login");
+    if (!certificateDataValidation(certificateData)) {
+      alert("모든 항목을 다 채워주세요.");
+    } else {
+      try {
+        const deleteResponse = await axios.post(
+          BACKEND_URL + "/certificates/delete",
+          deleteList.filter((item) => item > 0),
+          header(access_token)
+        );
+        const response = await axios.put(
+          BACKEND_URL + "/certificates",
+          certificateData,
+          header(access_token)
+        );
+        setCertificateData(response.data);
+        setEdit(false);
+        setNewIndex(0);
+        setDeleteList([]);
+      } catch (error) {
+        if (error.response !== undefined && error.response.status === 401) {
+          try {
+            const refresh_response = await axios.post(
+              BACKEND_URL + `/refresh/token`,
+              { user_id: user_id }
+            );
+            const new_token = refresh_response.data.access_token;
+            dispatch(refresh(new_token));
+            const deleteResponse = await axios.post(
+              BACKEND_URL + "/certificates/delete",
+              deleteList.filter((item) => item > 0),
+              header(new_token)
+            );
+            const response = await axios.put(
+              BACKEND_URL + "/certificates",
+              certificateData,
+              header(new_token)
+            );
+            setCertificateData(response.data);
+            setEdit(false);
+            setNewIndex(0);
+            setDeleteList([]);
+          } catch (err) {
+            alert("로그인 세션이 만료 되었습니다.");
+            dispatch(logout());
+            history.push("/login");
+          }
         }
       }
     }
