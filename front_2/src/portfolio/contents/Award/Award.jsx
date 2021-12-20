@@ -8,7 +8,7 @@ import { BACKEND_URL } from "utils/env";
 import { useDispatch } from "react-redux";
 import { logout, refresh } from "redux/action";
 import { useHistory } from "react-router";
-import { awardDataValidation } from 'utils/validation';
+import { awardDataValidation } from "utils/validation";
 const AwardStyle = styled.div`
   border: solid 3px grey;
   display: flex;
@@ -91,11 +91,23 @@ const Award = (props) => {
             setEdit(false);
             setNewIndex(0);
             setDeleteList([]);
-          } catch (err) {
-            alert("로그인 세션이 만료 되었습니다.");
+          } catch (error) {
+            if (error.response !== undefined && error.response.status === 401) {
+              // 토큰 재발급 실패시
+              alert("로그인 세션이 만료 되었습니다.");
+            } else {
+              // 그 외 오류
+              alert("예기치 못한 오류가 발생했습니다. 자동 로그아웃 됩니다.");
+            }
+
             dispatch(logout());
             history.push("/login");
           }
+        } else {
+          // 토큰 만료가 아닌 다른 오류
+          alert("예기치 못한 오류가 발생했습니다. 자동 로그아웃 됩니다.");
+          dispatch(logout());
+          history.push("/login");
         }
       }
     }

@@ -55,7 +55,7 @@ const Network = () => {
         setSearchResult(response.data);
         setIsFetched(true);
       } catch (error) {
-        if (error.response.status === 401) {
+        if (error.response !== undefined && error.response.status === 401) {
           console.log("refreshing!");
           try {
             const refresh_response = await axios.post(
@@ -72,10 +72,22 @@ const Network = () => {
             setSearchResult(response.data);
             setIsFetched(true);
           } catch (err) {
-            alert("로그인 세션이 만료 되었습니다.");
+            if (error.response !== undefined && error.response.status === 401) {
+              // 토큰 재발급 실패시
+              alert("로그인 세션이 만료 되었습니다.");
+            } else {
+              // 그 외 오류
+              alert("예기치 못한 오류가 발생했습니다. 자동 로그아웃 됩니다.");
+            }
+
             dispatch(logout());
             history.push("/login");
           }
+        } else {
+          // 토큰 만료가 아닌 다른 오류
+          alert("예기치 못한 오류가 발생했습니다. 자동 로그아웃 됩니다.");
+          dispatch(logout());
+          history.push("/login");
         }
       }
     }

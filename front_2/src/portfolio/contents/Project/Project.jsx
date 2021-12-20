@@ -72,6 +72,7 @@ const Project = (props) => {
         setDeleteList([]);
       } catch (error) {
         if (error.response !== undefined && error.response.status === 401) {
+          // 토큰 만료시
           try {
             const refresh_response = await axios.post(
               BACKEND_URL + `/refresh/token`,
@@ -93,11 +94,23 @@ const Project = (props) => {
             setEdit(false);
             setNewIndex(0);
             setDeleteList([]);
-          } catch (err) {
-            alert("로그인 세션이 만료 되었습니다.");
+          } catch (error) {
+            if (error.response !== undefined && error.response.status === 401) {
+              // 토큰 재발급 실패시
+              alert("로그인 세션이 만료 되었습니다.");
+            } else {
+              // 그 외 오류
+              alert("예기치 못한 오류가 발생했습니다. 자동 로그아웃 됩니다.");
+            }
+
             dispatch(logout());
             history.push("/login");
           }
+        } else {
+          // 토큰 만료가 아닌 다른 오류
+          alert("예기치 못한 오류가 발생했습니다. 자동 로그아웃 됩니다.");
+          dispatch(logout());
+          history.push("/login");
         }
       }
     }
