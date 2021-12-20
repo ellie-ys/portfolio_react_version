@@ -1,44 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
 import axios from "axios";
 import { BACKEND_URL } from "utils/env";
 import { useDispatch } from "react-redux";
 import { logout, refresh } from "redux/action";
 import { useHistory } from "react-router";
 import { nameRegex } from "utils/validation";
-
-const ProfileStyle = styled.div`
-  border: solid 3px grey;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  margin: 15px;
-
-  button {
-    width: 30%;
-    margin: 0 auto;
-  }
-`;
-const ProfileButtonWrapper = styled.div`
-  margin-top: 20px;
-`;
-
-const ProfileFormStyle = styled.div`
-  border: 1px solid green;
-  padding: 3px;
-  + div {
-    margin-top: 20px;
-  }
-`;
-
-const ProfileContentsStyle = styled.div`
-  border: solid 2px purple;
-
-  + div {
-    margin-top: 10px;
-  }
-`;
+import {
+  ContentsStyle,
+  ContentsButtonWrapper,
+  ContentsFormStyle,
+  ProfileInnerStyle,
+} from "portfolio/contents/ContentsStyle";
 
 const Profile = (props) => {
   const [edit, setEdit] = useState(false);
@@ -128,12 +101,12 @@ const Profile = (props) => {
   }, [userName, description, image]);
 
   return (
-    <ProfileStyle>
+    <ContentsStyle>
       <h2>Profile</h2>
       {edit ? (
         <div>
           <form onSubmit={submitHandler} encType="multipart/form-data">
-            <ProfileFormStyle>
+            <ContentsFormStyle>
               <div>
                 <input
                   type="file"
@@ -157,17 +130,17 @@ const Profile = (props) => {
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
-            </ProfileFormStyle>
+            </ContentsFormStyle>
 
-            <ProfileButtonWrapper>
+            <ContentsButtonWrapper>
               <button type="submit"> Complete </button>
               <button onClick={editCancelHandler}> Cancel </button>
-            </ProfileButtonWrapper>
+            </ContentsButtonWrapper>
           </form>
         </div>
       ) : (
         <div>
-          <ProfileContentsStyle>
+          <ProfileInnerStyle>
             {image === null ? (
               <div> No Image </div>
             ) : (
@@ -180,15 +153,15 @@ const Profile = (props) => {
 
             <p> {props.profileData.name} </p>
             <p> {props.profileData.description} </p>
-          </ProfileContentsStyle>
-          <ProfileButtonWrapper>
+          </ProfileInnerStyle>
+          <ContentsButtonWrapper>
             {user_id === props.userId && (
               <button onClick={editTriggerHandler}> Edit </button>
             )}
-          </ProfileButtonWrapper>
+          </ContentsButtonWrapper>
         </div>
       )}
-    </ProfileStyle>
+    </ContentsStyle>
   );
 };
 

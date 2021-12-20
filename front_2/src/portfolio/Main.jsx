@@ -2,20 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Award, Certificate, Education, Profile, Project } from "./Contents";
 import Footer from "./Footer.jsx";
-import styled from "styled-components";
 import axios from "axios";
 import { BACKEND_URL } from "utils/env";
 import { header } from "utils/header";
 import { useHistory } from "react-router-dom";
 import { logout, refresh } from "redux/action";
-
-const MainStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  width: 40%;
-  margin: 0 auto;
-`;
+import {
+  MainStyle,
+  MainContents,
+  PortfolioStyle,
+  ProfileStyle,
+} from "portfolio/MainStyle";
 
 const Main = () => {
   const access_token = useSelector((state) => state.user.access_token);
@@ -118,28 +115,29 @@ const Main = () => {
     <>
       <MainStyle>
         {isFetched ? (
-          <div>
-            <Profile
-              profileData={portfolios.profileData}
-              userId={portfolios.userId}
-            />
-            <Education
-              eduData={portfolios.eduData}
-              userId={portfolios.userId}
-            />
-            <Award
-              awardData={portfolios.awardData}
-              userId={portfolios.userId}
-            />
-            <Project
-              projectData={portfolios.projectData}
-              userId={portfolios.userId}
-            />
-            <Certificate
-              certificateData={portfolios.certificateData}
-              userId={portfolios.userId}
-            />
-          </div>
+          <MainContents>
+            <ProfileStyle>
+              <Profile
+                profileData={portfolios.profileData}
+                userId={portfolios.userId}
+              />
+            </ProfileStyle>
+            <PortfolioStyle>
+              <Education eduData={portfolios.eduData} userId={portfolios.userId} />
+              <Award
+                awardData={portfolios.awardData}
+                userId={portfolios.userId}
+              />
+              <Project
+                projectData={portfolios.projectData}
+                userId={portfolios.userId}
+              />
+              <Certificate
+                certificateData={portfolios.certificateData}
+                userId={portfolios.userId}
+              />
+            </PortfolioStyle>
+          </MainContents>
         ) : (
           <div> Loading... </div>
         )}

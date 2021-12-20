@@ -4,14 +4,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 
-const ProjectFormStyle = styled.div`
-  border: 1px solid green;
-  padding: 3px;
-  + div {
-    margin-top: 20px;
-  }
-`;
-
 const DatePickerStyle = styled.div`
   display: inline-block;
 `;
@@ -65,7 +57,7 @@ const ProjectForm = (props) => {
   };
 
   return (
-    <ProjectFormStyle>
+    <ContentsFormStyle>
       <InnerFormStyle>
         <input
           type="text"
@@ -109,7 +101,7 @@ const ProjectForm = (props) => {
         />
       </InnerFormStyle>
       <button onClick={deleteHandler}> Delete </button>
-    </ProjectFormStyle>
+    </ContentsFormStyle>
   );
 };
 

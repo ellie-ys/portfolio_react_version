@@ -1,20 +1,12 @@
 import React from "react";
-import styled from "styled-components";
-
-const AwardContentsStyle = styled.div`
-  border: solid 2px purple;
-
-  + div {
-    margin-top: 10px;
-  }
-`;
+import { ContentsInnerStyle } from "portfolio/contents/ContentsStyle";
 
 const AwardContents = (props) => {
   return (
-    <AwardContentsStyle key={props.awardId}>
+    <ContentsInnerStyle key={props.awardId}>
       <p> {props.awardName} </p>
       <p> {props.awardDescription} </p>
-    </AwardContentsStyle>
+    </ContentsInnerStyle>
   );
 };
 

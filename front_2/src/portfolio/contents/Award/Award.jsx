@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
 import axios from "axios";
 import AwardContents from "portfolio/contents/Award/AwardContents";
 import AwardForm from "portfolio/contents/Award/AwardForm";
@@ -9,22 +8,10 @@ import { useDispatch } from "react-redux";
 import { logout, refresh } from "redux/action";
 import { useHistory } from "react-router";
 import { awardDataValidation } from "utils/validation";
-const AwardStyle = styled.div`
-  border: solid 3px grey;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  margin: 15px;
-
-  & > button {
-    width: 30%;
-    margin: 0 auto;
-  }
-`;
-
-const AwardButtonWrapper = styled.div`
-  margin-top: 20px;
-`;
+import {
+  ContentsStyle,
+  ContentsButtonWrapper,
+} from "portfolio/contents/ContentsStyle";
 
 const Award = (props) => {
   const [edit, setEdit] = useState(false);
@@ -125,7 +112,7 @@ const Award = (props) => {
   };
 
   return (
-    <AwardStyle>
+    <ContentsStyle>
       <h2> Award </h2>
       {edit ? (
         <div>
@@ -145,15 +132,15 @@ const Award = (props) => {
             );
           })}
 
-          <AwardButtonWrapper>
+          <ContentsButtonWrapper>
             <button onClick={editCompleteHandler}> Complete </button>
             <button onClick={editCancelHandler}> Cancel </button>
             <button onClick={addAwardDataHandler}> Add </button>
-          </AwardButtonWrapper>
+          </ContentsButtonWrapper>
         </div>
       ) : (
         <div>
-          {props.awardData.map((element) => {
+          {awardData.map((element) => {
             return (
               <AwardContents
                 key={element.id}
@@ -163,14 +150,14 @@ const Award = (props) => {
               />
             );
           })}
-          <AwardButtonWrapper>
+          <ContentsButtonWrapper>
             {user_id === props.userId && (
               <button onClick={editTriggerHandler}> Edit </button>
             )}
-          </AwardButtonWrapper>
+          </ContentsButtonWrapper>
         </div>
       )}
-    </AwardStyle>
+    </ContentsStyle>
   );
 };
 

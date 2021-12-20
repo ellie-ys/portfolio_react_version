@@ -4,6 +4,13 @@ import { useHistory } from "react-router-dom";
 import { login } from "redux/action";
 import { BACKEND_URL } from "utils/env";
 import { passwordRegex, emailRegex } from "utils/validation";
+import {
+  LoginFormStyle,
+  LoginTitle,
+  LoginButtonStyle,
+  InputStyle,
+  FlashMessage,
+} from "portfolio/login/LoginStyle";
 
 import axios from "axios";
 import styled from "styled-components";
@@ -50,7 +57,7 @@ const LoginForm = () => {
     if (email === "" || pw === "") setIsBlank(true);
     else setIsBlank(false);
 
-    if (emailRegex(email) && pwRegex(pw)) setValidation(true);
+    if (emailRegex(email) && passwordRegex(pw)) setValidation(true);
     else setValidation(false);
   }, [email, pw]);
 
@@ -61,24 +68,34 @@ const LoginForm = () => {
 
   return (
     <LoginFormStyle>
-      <p>{message}</p>
-      <form>
-        <p>Email</p>
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <p>Password</p>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </form>
-      <button type="submit" onClick={loginHandler}>
-        Login
-      </button>
+      <LoginTitle> 레이서 포트폴리오 로그인 </LoginTitle>
+      <FlashMessage>{message}</FlashMessage>
+
+      <InputStyle>
+        <div>
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="이메일"
+          />
+        </div>
+        <div>
+          <input
+            type="password"
+            value={pw}
+            onChange={(e) => setPw(e.target.value)}
+            placeholder="비밀번호"
+          />
+        </div>
+      </InputStyle>
+      <LoginButtonStyle>
+        <button type="submit" onClick={loginHandler}>
+          {" "}
+          로그인{" "}
+        </button>
+        <button onClick={googleLoginHandler}> 구글계정으로 로그인</button>
+      </LoginButtonStyle>
     </LoginFormStyle>
   );
 };

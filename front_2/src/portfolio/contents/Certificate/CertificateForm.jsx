@@ -3,14 +3,7 @@ import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
-
-const CertificateFormStyle = styled.div`
-  border: 1px solid green;
-  padding: 3px;
-  + div {
-    margin-top: 20px;
-  }
-`;
+import { ContentsFormStyle } from "portfolio/contents/ContentsStyle";
 
 const DatePickerStyle = styled.div`
   display: inline-block;
@@ -58,7 +51,7 @@ const CertificateForm = (props) => {
   };
 
   return (
-    <CertificateFormStyle>
+    <ContentsFormStyle>
       <InnerFormStyle>
         <input
           type="text"
@@ -86,7 +79,7 @@ const CertificateForm = (props) => {
         </DatePickerStyle>
       </InnerFormStyle>
       <button onClick={deleteHandler}> 삭제 </button>
-    </CertificateFormStyle>
+    </ContentsFormStyle>
   );
 };
 
