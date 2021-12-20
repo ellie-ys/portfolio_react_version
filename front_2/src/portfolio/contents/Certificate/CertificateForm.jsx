@@ -3,15 +3,11 @@ import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
-import { ContentsFormStyle } from "portfolio/contents/ContentsStyle";
-
-const DatePickerStyle = styled.div`
-  display: inline-block;
-`;
-
-const InnerFormStyle = styled.div`
-  margin: 5px;
-`;
+import {
+  ContentsFormStyle,
+  ContentsFormInputStyle,
+} from "portfolio/contents/ContentsStyle";
+import { BsTrash } from "react-icons/bs";
 
 const CertificateForm = (props) => {
   const [certificate, setCertificate] = useState(props.formName);
@@ -52,33 +48,30 @@ const CertificateForm = (props) => {
 
   return (
     <ContentsFormStyle>
-      <InnerFormStyle>
+      <ContentsFormInputStyle>
         <input
           type="text"
           placeholder="자격증"
           value={certificate}
           onChange={(e) => setCertificate(e.target.value)}
         />
-      </InnerFormStyle>
-      <InnerFormStyle>
         <input
           type="text"
           placeholder="발급 기관"
           value={agency}
           onChange={(e) => setAgency(e.target.value)}
         />
-      </InnerFormStyle>
-      <InnerFormStyle>
-        <p>취득 날짜</p>
-        <DatePickerStyle>
-          <DatePicker
-            dateFormat="yyyy-MM-dd"
-            selected={formattedDate(date)}
-            onChange={(date) => setDate(moment(date).format("YYYY-MM-DD"))}
-          />
-        </DatePickerStyle>
-      </InnerFormStyle>
-      <button onClick={deleteHandler}> 삭제 </button>
+
+        <DatePicker
+          dateFormat="yyyy-MM-dd"
+          selected={formattedDate(date)}
+          onChange={(date) => setDate(moment(date).format("YYYY-MM-DD"))}
+        />
+      </ContentsFormInputStyle>
+      <BsTrash size="30" onClick={deleteHandler}>
+        {" "}
+        Delete{" "}
+      </BsTrash>
     </ContentsFormStyle>
   );
 };

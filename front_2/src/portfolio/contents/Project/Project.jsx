@@ -13,6 +13,8 @@ import {
   ContentsStyle,
   ContentsButtonWrapper,
 } from "portfolio/contents/ContentsStyle";
+import { BsPencilSquare, BsPlusSquare, BsCheckBox } from "react-icons/bs";
+import { CgCloseR } from "react-icons/cg";
 
 const Project = (props) => {
   const [edit, setEdit] = useState(false);
@@ -141,9 +143,18 @@ const Project = (props) => {
           })}
 
           <ContentsButtonWrapper>
-            <button onClick={editCompleteHandler}> 완료 </button>
-            <button onClick={editCancelHandler}> 취소 </button>
-            <button onClick={addProjectDataHandler}> 추가 </button>
+            <BsPlusSquare size="26" onClick={addProjectDataHandler}>
+              {" "}
+              Add{" "}
+            </BsPlusSquare>
+            <BsCheckBox size="29" onClick={editCompleteHandler}>
+              {" "}
+              Complete{" "}
+            </BsCheckBox>
+            <CgCloseR size="29" onClick={editCancelHandler}>
+              {" "}
+              Cancel{" "}
+            </CgCloseR>
           </ContentsButtonWrapper>
         </div>
       ) : (
@@ -163,7 +174,10 @@ const Project = (props) => {
           })}
           <ContentsButtonWrapper>
             {user_id === props.userId && (
-              <button onClick={editTriggerHandler}> Edit </button>
+              <BsPencilSquare size="26" onClick={editTriggerHandler}>
+                {" "}
+                Edit{" "}
+              </BsPencilSquare>
             )}
           </ContentsButtonWrapper>
         </div>

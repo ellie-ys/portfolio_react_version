@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { ContentsFormStyle } from "portfolio/contents/ContentsStyle";
+import {
+  ContentsFormStyle,
+  ContentsFormInputStyle,
+  ContentsRadioStyle,
+} from "portfolio/contents/ContentsStyle";
 import { BsTrash } from "react-icons/bs";
 
 const EduForm = (props) => {
@@ -32,24 +36,21 @@ const EduForm = (props) => {
 
   return (
     <ContentsFormStyle>
-      <div>
-        <div>
-          <input
-            type="text"
-            placeholder="학교"
-            value={edu}
-            onChange={(e) => setEdu(e.target.value)}
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            placeholder="전공"
-            value={major}
-            onChange={(e) => setMajor(e.target.value)}
-          />
-        </div>
-        <div>
+      <ContentsFormInputStyle>
+        <input
+          type="text"
+          placeholder="학교"
+          value={edu}
+          onChange={(e) => setEdu(e.target.value)}
+        />
+
+        <input
+          type="text"
+          placeholder="전공"
+          value={major}
+          onChange={(e) => setMajor(e.target.value)}
+        />
+        <ContentsRadioStyle>
           <label>
             {" "}
             <input
@@ -94,9 +95,12 @@ const EduForm = (props) => {
             />{" "}
             중퇴{" "}
           </label>
-        </div>
-      </div>
-      <button onClick={deleteHandler}> 삭제 </button>
+        </ContentsRadioStyle>
+      </ContentsFormInputStyle>
+      <BsTrash size="30" onClick={deleteHandler}>
+        {" "}
+        Delete{" "}
+      </BsTrash>
     </ContentsFormStyle>
   );
 };

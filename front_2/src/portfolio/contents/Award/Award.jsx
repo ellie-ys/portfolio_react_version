@@ -13,6 +13,9 @@ import {
   ContentsButtonWrapper,
 } from "portfolio/contents/ContentsStyle";
 
+import { BsPencilSquare, BsPlusSquare, BsCheckBox } from "react-icons/bs";
+import { CgCloseR } from "react-icons/cg";
+
 const Award = (props) => {
   const [edit, setEdit] = useState(false);
   const [copyAwardData, setCopyAwardData] = useState(props.awardData);
@@ -133,9 +136,18 @@ const Award = (props) => {
           })}
 
           <ContentsButtonWrapper>
-            <button onClick={editCompleteHandler}> Complete </button>
-            <button onClick={editCancelHandler}> Cancel </button>
-            <button onClick={addAwardDataHandler}> Add </button>
+            <BsPlusSquare size="26" onClick={addAwardDataHandler}>
+              {" "}
+              Add{" "}
+            </BsPlusSquare>
+            <BsCheckBox size="29" onClick={editCompleteHandler}>
+              {" "}
+              Complete{" "}
+            </BsCheckBox>
+            <CgCloseR size="29" onClick={editCancelHandler}>
+              {" "}
+              Cancel{" "}
+            </CgCloseR>
           </ContentsButtonWrapper>
         </div>
       ) : (
@@ -152,7 +164,10 @@ const Award = (props) => {
           })}
           <ContentsButtonWrapper>
             {user_id === props.userId && (
-              <button onClick={editTriggerHandler}> Edit </button>
+              <BsPencilSquare size="26" onClick={editTriggerHandler}>
+                {" "}
+                Edit{" "}
+              </BsPencilSquare>
             )}
           </ContentsButtonWrapper>
         </div>

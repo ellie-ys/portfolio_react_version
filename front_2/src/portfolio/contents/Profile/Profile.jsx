@@ -11,7 +11,10 @@ import {
   ContentsButtonWrapper,
   ContentsFormStyle,
   ProfileInnerStyle,
+  ContentsFormInputStyle,
 } from "portfolio/contents/ContentsStyle";
+import { BsPencilSquare, BsCheckBox } from "react-icons/bs";
+import { CgCloseR } from "react-icons/cg";
 
 const Profile = (props) => {
   const [edit, setEdit] = useState(false);
@@ -107,34 +110,36 @@ const Profile = (props) => {
         <div>
           <form onSubmit={submitHandler} encType="multipart/form-data">
             <ContentsFormStyle>
-              <div>
+              <ContentsFormInputStyle>
                 <input
                   type="file"
                   placeholder="이미지"
                   onChange={(e) => setImage(e.target.files[0])}
                 />
-              </div>
-              <div>
                 <input
                   type="text"
                   placeholder="이름"
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
                 />
-              </div>
-              <div>
                 <input
                   type="text"
                   placeholder="한줄소개"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
-              </div>
+              </ContentsFormInputStyle>
             </ContentsFormStyle>
 
             <ContentsButtonWrapper>
-              <button type="submit"> Complete </button>
-              <button onClick={editCancelHandler}> Cancel </button>
+              <BsCheckBox size="29" type="submit">
+                {" "}
+                Complete{" "}
+              </BsCheckBox>
+              <CgCloseR size="29" onClick={editCancelHandler}>
+                {" "}
+                Cancel{" "}
+              </CgCloseR>
             </ContentsButtonWrapper>
           </form>
         </div>
@@ -156,8 +161,12 @@ const Profile = (props) => {
           </ProfileInnerStyle>
           <ContentsButtonWrapper>
             {user_id === props.userId && (
-              <button onClick={editTriggerHandler}> Edit </button>
+              <BsPencilSquare size="26" onClick={editTriggerHandler}>
+                {" "}
+                Edit{" "}
+              </BsPencilSquare>
             )}
+            
           </ContentsButtonWrapper>
         </div>
       )}

@@ -9,7 +9,7 @@ export const ContentsStyle = styled.div`
   + div {
     margin-top: 2rem;
   }
-
+G
   button {
     width: 30%;
     margin: 0 auto;
