@@ -22,6 +22,7 @@ const Profile = (props) => {
   const [userName, setUserName] = useState(props.profileData.name);
   const [image, setImage] = useState(props.profileData.image);
   const [description, setDescription] = useState(props.profileData.description);
+  const [imageHash, setImageHash] = useState(Date.now());
 
   const access_token = useSelector((state) => state.user.access_token);
   const user_id = useSelector((state) => state.user.user_id);
@@ -46,10 +47,9 @@ const Profile = (props) => {
     if (userName === "" || !nameRegex(userName)) {
       alert("이름은 필수입니다. (20자 이내)");
     } else {
-      let fileToUpload = image;
       const formData = new FormData();
 
-      formData.append("image", fileToUpload);
+      formData.append("image", image);
       formData.append("name", userName);
       formData.append("description", description);
 
@@ -61,6 +61,7 @@ const Profile = (props) => {
         );
         setProfileData(response.data);
         setEdit(false);
+        setImageHash(Date.now());
       } catch (error) {
         if (error.response !== undefined && error.response.status === 401) {
           try {
@@ -108,7 +109,7 @@ const Profile = (props) => {
       <h2>Profile</h2>
       {edit ? (
         <div>
-          <form onSubmit={submitHandler} encType="multipart/form-data">
+          <form>
             <ContentsFormStyle>
               <ContentsFormInputStyle>
                 <input
@@ -132,7 +133,7 @@ const Profile = (props) => {
             </ContentsFormStyle>
 
             <ContentsButtonWrapper>
-              <BsCheckBox size="29" type="submit">
+              <BsCheckBox size="29" type="submit" onClick={submitHandler}>
                 {" "}
                 Complete{" "}
               </BsCheckBox>
@@ -150,7 +151,7 @@ const Profile = (props) => {
               <div> No Image </div>
             ) : (
               <img
-                src={`data:image/png;base64,${props.profileData.image}`}
+                src={`${profileData.image}?${imageHash}`}
                 width="100px"
                 alt="프로필사진"
               />
@@ -166,7 +167,6 @@ const Profile = (props) => {
                 Edit{" "}
               </BsPencilSquare>
             )}
-            
           </ContentsButtonWrapper>
         </div>
       )}
