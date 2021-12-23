@@ -68,7 +68,7 @@ const LoginForm = () => {
 
   return (
     <LoginFormStyle>
-      <LoginTitle> 레이서 포트폴리오 로그인 </LoginTitle>
+      <LoginTitle> RACERIN LOGIN </LoginTitle>
       <FlashMessage>{message}</FlashMessage>
 
       <InputStyle>

@@ -73,7 +73,7 @@ const RegisterForm = () => {
 
   return (
     <RegisterFormStyle>
-      <RegisterTitle> 레이서 포트폴리오 회원가입 </RegisterTitle>
+      <RegisterTitle> RACERIN SIGNUP </RegisterTitle>
       <div>
         <input
           type="text"
