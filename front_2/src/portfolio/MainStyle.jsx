@@ -3,9 +3,10 @@ import styled from "styled-components";
 export const MainStyle = styled.div`
   display: flex;
   flex-direction: column;
-  text-align: center;
+  text-align: left;
   width: 80%;
   margin: 0 auto;
+  margin-bottom: 8rem;
 `;
 
 export const MainContents = styled.div`
@@ -18,16 +19,16 @@ export const MainContents = styled.div`
 `;
 
 export const ProfileStyle = styled.div`
-  border: 2px solid rgba(100, 0, 100, 0.3);
+  border: 2px solid rgba(0, 0, 100, 0.3);
   background-color: white;
-  height: 23%;
+  height: 20rem;
 `;
 
 export const PortfolioStyle = styled.div`
   width: 100%;
 
   & > div {
-    border: 2px solid rgba(100, 0, 100, 0.3);
+    border: 2px solid rgba(0, 0, 100, 0.3);
     background-color: white;
   }
 `;

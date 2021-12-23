@@ -26,6 +26,9 @@ export const LoginButtonStyle = styled.div`
     padding: 0 1.5rem;
     border-radius: 3px;
     cursor: pointer;
+    :hover {
+      opacity: 0.7;
+    }
   }
 `;
 

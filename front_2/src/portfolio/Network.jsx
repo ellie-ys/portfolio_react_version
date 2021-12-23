@@ -4,30 +4,13 @@ import { BACKEND_URL } from "../utils/env";
 import { useSelector, useDispatch } from "react-redux";
 import { header } from "utils/header";
 import { logout, refresh } from "redux/action";
-
-import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-
-const NetworkStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const NetworkContentStyle = styled.div`
-  border: solid 2px black;
-  text-align: center;
-  width: 200px;
-  margin-top: 50px;
-`;
-
-const NetworkContentWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 200px 200px 200px;
-  column-gap: 50px;
-  row-gap: 30px;
-`;
+import {
+  NetworkStyle,
+  NetworkContentStyle,
+  NetworkContentWrapper,
+  SearchButtonStyle,
+} from "portfolio/NetworkStyle";
 
 const Network = () => {
   const access_token = useSelector((state) => state.user.access_token);
@@ -39,6 +22,7 @@ const Network = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [searchBar, setSearchBar] = useState("");
   const [noResult, setNoResult] = useState(false);
+  const [isSearched, setIsSearched] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -101,11 +85,13 @@ const Network = () => {
         portfolios.filter((element) => element.name.indexOf(searchBar) >= 0)
       );
       setSearchBar("");
+      setIsSearched(true);
     }
   };
 
   const searchAllHandler = () => {
     setSearchResult(portfolios);
+    setIsSearched(false);
   };
 
   const contentClickHandler = (id) => {
@@ -128,9 +114,18 @@ const Network = () => {
               type="text"
               value={searchBar}
               onChange={(e) => setSearchBar(e.target.value)}
+              placeholder="이름"
             />
-            <button onClick={searchSubmitHandler}> 검색 </button>
-            <button onClick={searchAllHandler}> 전체보기 </button>
+            <SearchButtonStyle onClick={searchSubmitHandler}>
+              {" "}
+              검색{" "}
+            </SearchButtonStyle>
+            {isSearched && (
+              <SearchButtonStyle onClick={searchAllHandler}>
+                {" "}
+                전체보기{" "}
+              </SearchButtonStyle>
+            )}
           </div>
           <NetworkContentWrapper>
             {noResult ? (
@@ -138,12 +133,13 @@ const Network = () => {
             ) : (
               searchResult.map((element) => {
                 return (
-                  <NetworkContentStyle
-                    key={element.id}
-                    onClick={() => contentClickHandler(element.id)}
-                  >
+                  <NetworkContentStyle key={element.id}>
                     <div>{element.name}</div>
                     <div>{element.description}</div>
+                    <button onClick={() => contentClickHandler(element.id)}>
+                      {" "}
+                      정보 보기{" "}
+                    </button>
                   </NetworkContentStyle>
                 );
               })

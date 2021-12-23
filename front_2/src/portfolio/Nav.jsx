@@ -22,16 +22,23 @@ const Navi = (props) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Link to="/main" className="nav-link">
-                Main
-              </Link>
-              <Link to="/network" className="nav-link">
-                Network
-              </Link>
               {isLogin ? (
-                <Link to="/login" className="nav-link" onClick={logoutHandler}>
-                  Logout
-                </Link>
+                <>
+                  <Link to="/main" className="nav-link">
+                    Main
+                  </Link>
+                  <Link to="/network" className="nav-link">
+                    Network
+                  </Link>
+
+                  <Link
+                    to="/login"
+                    className="nav-link"
+                    onClick={logoutHandler}
+                  >
+                    Logout
+                  </Link>
+                </>
               ) : (
                 <>
                   <Link to="/login" className="nav-link">
