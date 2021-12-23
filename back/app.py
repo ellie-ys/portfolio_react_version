@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_migrate import Migrate
-from db_connect import db
 
 from apis.server_api import serverbp
 
@@ -14,8 +13,10 @@ from apis.certificates import certificates
 from apis.network import network
 
 import config
-from admin import SECRET_KEY, JWT_SECRET_KEY
+from admin import SECRET_KEY, JWT_SECRET_KEY, STORAGE_NAME, STORAGE_KEY
 from flask_jwt_extended import JWTManager
+from oauth2client.contrib.flask_util import UserOAuth2
+from db_connect import db, azure_storage
 
 import os
 
@@ -45,8 +46,11 @@ def create_app():
     app.config['JWT_SECRET_KEY'] = JWT_SECRET_KEY
     app.config['JWT_ACCESS_TOKEN_EXPIRES'] = config.expires_access
     app.config['JWT_REFRESH_TOKEN_EXPIRES'] = config.expires_refresh
-    jwt = JWTManager(app)
+    app.config['AZURE_STORAGE_ACCOUNT_NAME'] = STORAGE_NAME
+    app.config['AZURE_STORAGE_ACCOUNT_KEY'] = STORAGE_KEY
 
+    jwt = JWTManager(app)
+    azure_storage.init_app(app)
     CORS(app)
 
     return app

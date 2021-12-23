@@ -1,11 +1,8 @@
-from flask import request, jsonify, Blueprint, current_app
+from azure.storage.blob.models import ContentSettings
+from flask import request, jsonify, Blueprint
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.user import User
-from db_connect import db
-
-from PIL import Image
-from base64 import b64encode
-import os
+from db_connect import db, azure_storage
 from io import BytesIO
 from json import dumps
 from utils.validation import validate_name
@@ -25,28 +22,14 @@ def put_profile():
     return jsonify(message = 'invalid name'), 400
 
   user_info = get_jwt_identity()
-  
+  target_profile = User.query.filter_by(id = user_info['id']).first()
   if 'image' in request.files:
     image_file = request.files['image'].read()
-    image_save = Image.open(BytesIO(image_file))
-    filename = str(user_info['id']) + '.' + image_save.format
-    image_save.save(os.path.join(current_app.config['UPLOAD_DIR'], 'media', filename))
-    
-    target_profile = User.query.filter_by(id = user_info['id']).first()
-    target_profile.image = filename
-    db.session.commit()
+    image_stream = BytesIO(image_file)
+    azure_storage.block_blob_service.create_blob_from_stream(container_name='profile-image', blob_name=str(user_info['id']), stream=image_stream, content_settings=ContentSettings(content_type='image'))
+    image_name = 'https://racerportfolio.blob.core.windows.net/profile-image/' + str(user_info['id']) 
+    target_profile.image = image_name
 
-
-
-  
-  target_profile = User.query.filter_by(id = user_info['id']).first()
-  if target_profile.image:
-    profile_image = Image.open(os.path.join(current_app.config['UPLOAD_DIR'], 'media', target_profile.image))
-    buffered = BytesIO()
-    profile_image.save(buffered, format=profile_image.format)
-    profile_image_bytes = buffered.getvalue()
-    profile_image_base64 = b64encode(profile_image_bytes)
-    profile_image_str = profile_image_base64.decode('utf-8')
   
   target_profile.name = request.form['name']
   target_profile.description = request.form['description']
@@ -54,6 +37,6 @@ def put_profile():
   json_profiles = dumps({
     'name': target_profile.name,
     'description': target_profile.description,
-    'image': profile_image_str if target_profile.image else target_profile.image
+    'image': target_profile.image
   })
   return json_profiles, 200

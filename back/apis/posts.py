@@ -1,4 +1,4 @@
-from flask import request, jsonify, Blueprint, current_app
+from flask import request, jsonify, Blueprint
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from models.education import Education
@@ -7,10 +7,6 @@ from models.award import Award
 from models.user import User
 from models.project import Project
 
-from PIL import Image
-from base64 import b64encode
-import os
-from io import BytesIO
 
 
 
@@ -33,15 +29,6 @@ def get_portfolio():
   
 
 
-  if profiles.image:
-    profile_image = Image.open(os.path.join(current_app.config['UPLOAD_DIR'], 'media', profiles.image))
-    buffered = BytesIO()
-    profile_image.save(buffered, format=profile_image.format)
-    profile_image_bytes = buffered.getvalue()
-    profile_image_base64 = b64encode(profile_image_bytes)
-    profile_image_str = profile_image_base64.decode('utf-8')
-  
-
 
 
   json_edus = [edu.as_dict() for edu in edus]
@@ -54,7 +41,7 @@ def get_portfolio():
       'profile': {
         'name': profiles.name,
         'description': profiles.description,
-        'image': profile_image_str if profiles.image else profiles.image
+        'image': profiles.image
       },
     'edus': json_edus,
     'awards': json_awards,
