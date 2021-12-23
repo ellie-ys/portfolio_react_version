@@ -4,7 +4,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.user import User
 
 
-network = Blueprint('network', __name__, url_prefix='/network')
+network = Blueprint('network', __name__, url_prefix='/api/network')
 
 @network.route('', methods=['GET'])
 @jwt_required()

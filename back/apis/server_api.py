@@ -7,7 +7,7 @@ from flask_bcrypt import Bcrypt
 from utils.validation import validate_email, validate_name, validate_password
 from flask_jwt_extended.utils import decode_token
 
-serverbp = Blueprint('serverbp', __name__)
+serverbp = Blueprint('serverbp', __name__, url_prefix='/api')
 bcrypt = Bcrypt()
 
 @serverbp.route('/network', methods=["POST"])

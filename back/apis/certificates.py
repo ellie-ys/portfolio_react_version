@@ -3,7 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.certificate import Certificate
 from db_connect import db
 
-certificates = Blueprint('certificates', __name__, url_prefix='/certificates')
+certificates = Blueprint('certificates', __name__, url_prefix='/api/certificates')
 
 @certificates.route('', methods=['PUT'])
 @jwt_required()

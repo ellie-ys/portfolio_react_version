@@ -3,7 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.award import Award
 from db_connect import db
 
-awards = Blueprint('awards', __name__, url_prefix='/awards')
+awards = Blueprint('awards', __name__, url_prefix='/api/awards')
 
 @awards.route('', methods=['PUT'])
 @jwt_required()
