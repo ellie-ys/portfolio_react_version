@@ -13,15 +13,13 @@ export const MainContents = styled.div`
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   grid-template-columns: 1fr 1.8fr;
-  column-gap: 10rem;
+  column-gap: 7rem;
   padding-left: 2rem;
   padding-right: 2rem;
 `;
 
 export const ProfileStyle = styled.div`
-  border: 2px solid rgba(0, 0, 100, 0.3);
-  background-color: white;
-  height: 20rem;
+  padding: 0;
 `;
 
 export const PortfolioStyle = styled.div`
@@ -29,6 +27,7 @@ export const PortfolioStyle = styled.div`
 
   & > div {
     border: 2px solid rgba(0, 0, 100, 0.3);
+    border-radius: 5px;
     background-color: white;
   }
 `;

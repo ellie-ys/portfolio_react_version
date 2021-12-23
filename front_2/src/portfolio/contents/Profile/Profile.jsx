@@ -7,20 +7,21 @@ import { logout, refresh } from "redux/action";
 import { useHistory } from "react-router";
 import { nameRegex } from "utils/validation";
 import {
-  ContentsStyle,
   ContentsButtonWrapper,
-  ContentsFormStyle,
   ProfileInnerStyle,
-  ContentsFormInputStyle,
+  ProfileFormInputStyle,
+  ProfileFormStyle,
+  ProfileContentStyle,
+  ProfileButtonWrapper,
 } from "portfolio/contents/ContentsStyle";
-import { BsPencilSquare, BsCheckBox } from "react-icons/bs";
-import { CgCloseR } from "react-icons/cg";
+import { BsPencilSquare } from "react-icons/bs";
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 
 const Profile = (props) => {
   const [edit, setEdit] = useState(false);
   const [copyProfileData, setCopyProfileData] = useState(props.profileData);
   const [userName, setUserName] = useState(props.profileData.name);
-  const [image, setImage] = useState(props.profileData.image);
+  const [image, setImage] = useState(null);
   const [description, setDescription] = useState(props.profileData.description);
   const [imageHash, setImageHash] = useState(Date.now());
 
@@ -40,6 +41,7 @@ const Profile = (props) => {
     setImage(copyProfileData.image);
     props.setProfileData(copyProfileData);
     setEdit(false);
+    setImage(null);
   };
 
   const submitHandler = async (e) => {
@@ -105,72 +107,92 @@ const Profile = (props) => {
   }, [userName, description, image]);
 
   return (
-    <ContentsStyle>
-      <h2>Profile</h2>
+    <ProfileContentStyle>
       {edit ? (
-        <div>
-          <form>
-            <ContentsFormStyle>
-              <ContentsFormInputStyle>
-                <input
-                  type="file"
-                  placeholder="이미지"
-                  onChange={(e) => setImage(e.target.files[0])}
-                />
-                <input
-                  type="text"
-                  placeholder="이름"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="한줄소개"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </ContentsFormInputStyle>
-            </ContentsFormStyle>
-
-            <ContentsButtonWrapper>
-              <BsCheckBox size="29" type="submit" onClick={submitHandler}>
-                {" "}
-                Complete{" "}
-              </BsCheckBox>
-              <CgCloseR size="29" onClick={editCancelHandler}>
-                {" "}
-                Cancel{" "}
-              </CgCloseR>
-            </ContentsButtonWrapper>
-          </form>
-        </div>
-      ) : (
-        <div>
-          <ProfileInnerStyle>
-            {image === null ? (
-              <div> No Image </div>
-            ) : (
-              <img
-                src={`${profileData.image}?${imageHash}`}
-                width="100px"
-                alt="프로필사진"
+        <ProfileInnerStyle>
+          <ProfileFormStyle>
+            <ProfileFormInputStyle>
+              <label for="file-input">
+                {image === null ? (
+                  <img src={props.profileData.image} />
+                ) : (
+                  <img src={URL.createObjectURL(image)} />
+                )}
+              </label>
+              <input
+                type="file"
+                id="file-input"
+                accept="image/*"
+                placeholder="이미지"
+                onChange={(e) => setImage(e.target.files[0])}
               />
-            )}
-
-            <p> {props.profileData.name} </p>
-            <p> {props.profileData.description} </p>
-          </ProfileInnerStyle>
+              <input
+                type="text"
+                placeholder="이름"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="한줄소개"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </ProfileFormInputStyle>
+          </ProfileFormStyle>
+          <ProfileButtonWrapper>
+            <AiOutlineCheck
+              size="30"
+              color="rgb(0, 150, 0)"
+              title="완료"
+              type="submit"
+              onClick={submitHandler}
+            >
+              {" "}
+            </AiOutlineCheck>
+            <AiOutlineClose
+              size="30"
+              color="rgb(150, 0, 0)"
+              title="취소"
+              onClick={editCancelHandler}
+            >
+              {" "}
+            </AiOutlineClose>
+          </ProfileButtonWrapper>
+        </ProfileInnerStyle>
+      ) : (
+        <ProfileInnerStyle>
+          {props.profileData.image === null ? (
+            <img src="https://$$#$#.png" alt="프로필사진" />
+          ) : (
+            <img
+              src={`${props.profileData.image}?${imageHash}`}
+              alt="프로필사진"
+            />
+          )}
+          <p style={{ fontSize: "1.3rem", textAlign: "center" }}>
+            {" "}
+            {profileData.name}{" "}
+          </p>
+          <p style={{ paddingLeft: "1rem", paddingRight: "1rem" }}>
+            {" "}
+            {profileData.description}{" "}
+          </p>
           <ContentsButtonWrapper>
             {user_id === props.userId && (
-              <BsPencilSquare size="26" onClick={editTriggerHandler}>
+              <BsPencilSquare
+                size="26"
+                color="rgb(100, 100, 200)"
+                onClick={editTriggerHandler}
+              >
                 {" "}
                 Edit{" "}
               </BsPencilSquare>
             )}
           </ContentsButtonWrapper>
-        </div>
+        </ProfileInnerStyle>
       )}
-    </ContentsStyle>
+    </ProfileContentStyle>
   );
 };
 

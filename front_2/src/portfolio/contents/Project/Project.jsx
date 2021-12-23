@@ -12,9 +12,10 @@ import { projectDataValidation } from "utils/validation";
 import {
   ContentsStyle,
   ContentsButtonWrapper,
+  ContentsEditButtonWrapper,
 } from "portfolio/contents/ContentsStyle";
-import { BsPencilSquare, BsPlusSquare, BsCheckBox } from "react-icons/bs";
-import { CgCloseR } from "react-icons/cg";
+import { BsPencilSquare } from "react-icons/bs";
+import { AiOutlinePlus, AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 
 const Project = (props) => {
   const [edit, setEdit] = useState(false);
@@ -120,7 +121,7 @@ const Project = (props) => {
 
   return (
     <ContentsStyle>
-      <h2> Project </h2>
+      <h4> Project </h4>
       {edit ? (
         <div>
           {props.projectData.map((element) => {
@@ -143,18 +144,30 @@ const Project = (props) => {
           })}
 
           <ContentsButtonWrapper>
-            <BsPlusSquare size="26" onClick={addProjectDataHandler}>
+            <AiOutlinePlus
+              size="30"
+              color="rgb(0, 150, 255)"
+              title="추가"
+              onClick={addProjectDataHandler}
+            >
               {" "}
-              Add{" "}
-            </BsPlusSquare>
-            <BsCheckBox size="29" onClick={editCompleteHandler}>
+            </AiOutlinePlus>
+            <AiOutlineCheck
+              size="30"
+              color="rgb(0, 150, 0)"
+              title="완료"
+              onClick={editCompleteHandler}
+            >
               {" "}
-              Complete{" "}
-            </BsCheckBox>
-            <CgCloseR size="29" onClick={editCancelHandler}>
+            </AiOutlineCheck>
+            <AiOutlineClose
+              size="30"
+              color="rgb(150, 0, 0)"
+              title="취소"
+              onClick={editCancelHandler}
+            >
               {" "}
-              Cancel{" "}
-            </CgCloseR>
+            </AiOutlineClose>
           </ContentsButtonWrapper>
         </div>
       ) : (
@@ -172,14 +185,18 @@ const Project = (props) => {
               />
             );
           })}
-          <ContentsButtonWrapper>
+          <ContentsEditButtonWrapper>
             {user_id === props.userId && (
-              <BsPencilSquare size="26" onClick={editTriggerHandler}>
+              <BsPencilSquare
+                size="26"
+                color="rgb(100, 100, 200)"
+                onClick={editTriggerHandler}
+              >
                 {" "}
                 Edit{" "}
               </BsPencilSquare>
             )}
-          </ContentsButtonWrapper>
+          </ContentsEditButtonWrapper>
         </div>
       )}
     </ContentsStyle>

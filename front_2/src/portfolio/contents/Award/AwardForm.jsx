@@ -3,7 +3,7 @@ import {
   ContentsFormStyle,
   ContentsFormInputStyle,
 } from "portfolio/contents/ContentsStyle";
-import { BsTrash } from "react-icons/bs";
+import { AiOutlineMinus } from "react-icons/ai";
 
 const AwardForm = (props) => {
   const [award, setAward] = useState(props.formName);
@@ -49,10 +49,14 @@ const AwardForm = (props) => {
           onChange={(e) => setDescription(e.target.value)}
         />
       </ContentsFormInputStyle>
-      <BsTrash size="30" onClick={deleteHandler}>
+      <AiOutlineMinus
+        size="30"
+        color="rgb(150, 150, 0)"
+        title="삭제"
+        onClick={deleteHandler}
+      >
         {" "}
-        Delete{" "}
-      </BsTrash>
+      </AiOutlineMinus>
     </ContentsFormStyle>
   );
 };

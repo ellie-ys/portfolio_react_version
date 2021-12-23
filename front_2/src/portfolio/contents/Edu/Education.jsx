@@ -11,9 +11,10 @@ import { eduDataValidation } from "utils/validation";
 import {
   ContentsStyle,
   ContentsButtonWrapper,
-} from "portfolio/contents/ContentsStyle";
-import { BsPencilSquare, BsPlusSquare, BsCheckBox } from "react-icons/bs";
-import { CgCloseR } from "react-icons/cg";
+  ContentsEditButtonWrapper,
+} from "./contents/ContentsStyle";
+import { BsPencilSquare } from "react-icons/bs";
+import { AiOutlinePlus, AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 
 const Education = (props) => {
   const [edit, setEdit] = useState(false);
@@ -115,7 +116,7 @@ const Education = (props) => {
 
   return (
     <ContentsStyle>
-      <h2> Education </h2>
+      <h4> Education </h4>
       {edit ? (
         <div>
           {props.eduData.map((element) => {
@@ -135,23 +136,35 @@ const Education = (props) => {
             );
           })}
           <ContentsButtonWrapper>
-            <BsPlusSquare size="26" onClick={addEduDataHandler}>
+            <AiOutlinePlus
+              size="30"
+              color="rgb(0, 150, 255)"
+              title="추가"
+              onClick={addEduDataHandler}
+            >
               {" "}
-              Add{" "}
-            </BsPlusSquare>
-            <BsCheckBox size="29" onClick={editCompleteHandler}>
+            </AiOutlinePlus>
+            <AiOutlineCheck
+              size="30"
+              color="rgb(0, 150, 0)"
+              title="완료"
+              onClick={editCompleteHandler}
+            >
               {" "}
-              Complete{" "}
-            </BsCheckBox>
-            <CgCloseR size="29" onClick={editCancelHandler}>
+            </AiOutlineCheck>
+            <AiOutlineClose
+              size="30"
+              color="rgb(150, 0, 0)"
+              title="취소"
+              onClick={editCancelHandler}
+            >
               {" "}
-              Cancel{" "}
-            </CgCloseR>
+            </AiOutlineClose>
           </ContentsButtonWrapper>
         </div>
       ) : (
         <div>
-          {props.eduData.map((element) => {
+          {eduData.map((element) => {
             return (
               <EduContents
                 key={element.id}
@@ -162,15 +175,18 @@ const Education = (props) => {
               />
             );
           })}
-
-          <ContentsButtonWrapper>
+          <ContentsEditButtonWrapper>
             {user_id === props.userId && (
-              <BsPencilSquare size="26" onClick={editTriggerHandler}>
+              <BsPencilSquare
+                size="26"
+                color="rgb(100, 100, 200)"
+                onClick={editTriggerHandler}
+              >
                 {" "}
                 Edit{" "}
               </BsPencilSquare>
             )}
-          </ContentsButtonWrapper>
+          </ContentsEditButtonWrapper>
         </div>
       )}
     </ContentsStyle>

@@ -8,7 +8,7 @@ import {
   ContentsFormInputStyle,
   DatePickerStyle,
 } from "portfolio/contents/ContentsStyle";
-import { BsTrash } from "react-icons/bs";
+import { AiOutlineMinus } from "react-icons/ai";
 
 const ProjectForm = (props) => {
   const [project, setProject] = useState(props.formName);
@@ -79,7 +79,7 @@ const ProjectForm = (props) => {
               }
             />
           </DatePickerStyle>{" "}
-          ~
+          <span> ~ </span>
           <DatePickerStyle>
             <DatePicker
               dateFormat="yyyy-MM-dd"
@@ -95,10 +95,15 @@ const ProjectForm = (props) => {
           onChange={(e) => setUrl(e.target.value)}
         />
       </ContentsFormInputStyle>
-      <BsTrash size="30" onClick={deleteHandler}>
+      <AiOutlineMinus
+        size="30"
+        color="rgb(150, 150, 0)"
+        title="삭제"
+        onClick={deleteHandler}
+      >
         {" "}
-        삭제{" "}
-      </BsTrash>
+        Delete{" "}
+      </AiOutlineMinus>
     </ContentsFormStyle>
   );
 };

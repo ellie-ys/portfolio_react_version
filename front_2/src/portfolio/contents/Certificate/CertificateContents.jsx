@@ -6,7 +6,7 @@ const CertificateContents = (props) => {
     <ContentsInnerStyle key={props.certificateId}>
       <p> {props.certificateName} </p>
       <p> {props.certificateAgency} </p>
-      <p> {props.certificateDate} 취득 </p>     
+      <p className="date-content"> {props.certificateDate} 취득 </p>
     </ContentsInnerStyle>
   );
 };

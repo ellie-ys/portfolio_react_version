@@ -12,7 +12,7 @@ import {
   MainContents,
   PortfolioStyle,
   ProfileStyle,
-} from "portfolio/MainStyle";
+} from "./MainStyle";
 
 const Main = () => {
   const access_token = useSelector((state) => state.user.access_token);
@@ -123,7 +123,10 @@ const Main = () => {
               />
             </ProfileStyle>
             <PortfolioStyle>
-              <Education eduData={portfolios.eduData} userId={portfolios.userId} />
+              <Education
+                eduData={portfolios.eduData}
+                userId={portfolios.userId}
+              />
               <Award
                 awardData={portfolios.awardData}
                 userId={portfolios.userId}
@@ -139,7 +142,7 @@ const Main = () => {
             </PortfolioStyle>
           </MainContents>
         ) : (
-          <div> Loading... </div>
+          <div style={{ textAlign: "center" }}> Loading... </div>
         )}
       </MainStyle>
       <Footer />

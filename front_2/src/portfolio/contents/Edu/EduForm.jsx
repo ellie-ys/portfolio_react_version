@@ -4,7 +4,7 @@ import {
   ContentsFormInputStyle,
   ContentsRadioStyle,
 } from "portfolio/contents/ContentsStyle";
-import { BsTrash } from "react-icons/bs";
+import { AiOutlineMinus } from "react-icons/ai";
 
 const EduForm = (props) => {
   const [edu, setEdu] = useState(props.formName);
@@ -97,10 +97,15 @@ const EduForm = (props) => {
           </label>
         </ContentsRadioStyle>
       </ContentsFormInputStyle>
-      <BsTrash size="30" onClick={deleteHandler}>
+      <AiOutlineMinus
+        size="30"
+        color="rgb(150, 150, 0)"
+        title="삭제"
+        onClick={deleteHandler}
+      >
         {" "}
         Delete{" "}
-      </BsTrash>
+      </AiOutlineMinus>
     </ContentsFormStyle>
   );
 };

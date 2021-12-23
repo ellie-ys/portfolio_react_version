@@ -6,7 +6,7 @@ const ProjectContents = (props) => {
     <ContentsInnerStyle key={props.projectId}>
       <p> {props.projectName} </p>
       <p> {props.projectDescription} </p>
-      <p>
+      <p className="date-content">
         {" "}
         {props.projectStartdate} ~ {props.projectEnddate}
       </p>

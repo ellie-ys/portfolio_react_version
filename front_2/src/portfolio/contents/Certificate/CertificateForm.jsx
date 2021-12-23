@@ -6,8 +6,9 @@ import moment from "moment";
 import {
   ContentsFormStyle,
   ContentsFormInputStyle,
+  DatePickerStyle,
 } from "portfolio/contents/ContentsStyle";
-import { BsTrash } from "react-icons/bs";
+import { AiOutlineMinus } from "react-icons/ai";
 
 const CertificateForm = (props) => {
   const [certificate, setCertificate] = useState(props.formName);
@@ -62,16 +63,23 @@ const CertificateForm = (props) => {
           onChange={(e) => setAgency(e.target.value)}
         />
 
-        <DatePicker
-          dateFormat="yyyy-MM-dd"
-          selected={formattedDate(date)}
-          onChange={(date) => setDate(moment(date).format("YYYY-MM-DD"))}
-        />
+        <DatePickerStyle>
+          <DatePicker
+            dateFormat="yyyy-MM-dd"
+            selected={formattedDate(date)}
+            onChange={(date) => setDate(moment(date).format("YYYY-MM-DD"))}
+          />
+        </DatePickerStyle>
       </ContentsFormInputStyle>
-      <BsTrash size="30" onClick={deleteHandler}>
+      <AiOutlineMinus
+        size="30"
+        color="rgb(150, 150, 0)"
+        title="삭제"
+        onClick={deleteHandler}
+      >
         {" "}
         Delete{" "}
-      </BsTrash>
+      </AiOutlineMinus>
     </ContentsFormStyle>
   );
 };
