@@ -6,7 +6,7 @@ from db_connect import db, azure_storage
 from io import BytesIO
 from json import dumps
 from utils.validation import validate_name
-
+from admin import STORAGE_URL
 
 profiles = Blueprint('profiles', __name__, url_prefix='/api/profiles')
 
@@ -32,7 +32,7 @@ def put_profile():
     blob_client = container_client.get_blob_client(str(user_info['id']))
     blob_client.upload_blob(image_stream, blob_type="BlockBlob", overwrite=True)
 
-    image_name = 'https://racerportfolio.blob.core.windows.net/profile-image/' + str(user_info['id']) 
+    image_name = image_name = STORAGE_URL + str(user_info['id']) 
     target_profile.image = image_name
 
   

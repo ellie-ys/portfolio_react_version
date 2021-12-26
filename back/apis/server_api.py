@@ -45,7 +45,7 @@ def register():
         return jsonify(message = "already exist"), 400
 
     hashed_password = bcrypt.generate_password_hash(password).decode()
-    new_user = User(email=email, password=hashed_password, name=name, user_type=user_type)
+    new_user = new_user = User(email=email, password=hashed_password, name=name, description=" " ,image=STORAGE_URL+'defaultimage.png', user_type=user_type)
     db.session.add(new_user)
     db.session.commit()
     
