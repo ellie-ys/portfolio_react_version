@@ -114,7 +114,7 @@ const Profile = (props) => {
             <ProfileFormInputStyle>
               <label for="file-input">
                 {image === null ? (
-                  <img src={props.profileData.image} />
+                  <img src={`${props.profileData.image}?${imageHash}`} />
                 ) : (
                   <img src={URL.createObjectURL(image)} />
                 )}

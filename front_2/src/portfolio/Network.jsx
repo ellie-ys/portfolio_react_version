@@ -23,6 +23,7 @@ const Network = () => {
   const [searchBar, setSearchBar] = useState("");
   const [noResult, setNoResult] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
+  const [imageHash, setImageHash] = useState(Date.now());
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -38,6 +39,7 @@ const Network = () => {
         setPortfolios(response.data);
         setSearchResult(response.data);
         setIsFetched(true);
+        setImageHash(Date.now());
       } catch (error) {
         if (error.response !== undefined && error.response.status === 401) {
           console.log("refreshing!");
@@ -137,8 +139,7 @@ const Network = () => {
                     {element.image === null ? (
                       <img src="###.png" width="100px" />
                     ) : (
-                      <img src={element.image} />
-                    )}
+                      <img src={`${element.image}?${imageHash}`} />)}
                     <div style={{ fontSize: "1.4rem" }}>{element.name}</div>
 
                     <div>{element.description}</div>
