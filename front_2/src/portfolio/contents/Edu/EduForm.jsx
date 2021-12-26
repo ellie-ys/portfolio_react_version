@@ -56,44 +56,44 @@ const EduForm = (props) => {
             <input
               name={props.formId}
               type="radio"
-              value="재학"
+              value="재학중"
               onChange={(e) => setType(e.target.value)}
-              checked={type === "재학"}
+              checked={type === "재학중"}
             />{" "}
-            재학{" "}
+            재학중{" "}
           </label>
           <label>
             {" "}
             <input
               name={props.formId}
               type="radio"
-              value="졸업"
+              value="학사졸업"
               onChange={(e) => setType(e.target.value)}
-              checked={type === "졸업"}
+              checked={type === "학사졸업"}
             />{" "}
-            졸업{" "}
+            학사졸업{" "}
           </label>
           <label>
             {" "}
             <input
               name={props.formId}
               type="radio"
-              value="졸업예정"
+              value="석사졸업"
               onChange={(e) => setType(e.target.value)}
-              checked={type === "졸업예정"}
+              checked={type === "석사졸업"}
             />{" "}
-            졸업예정{" "}
+            석사졸업{" "}
           </label>
           <label>
             {" "}
             <input
               name={props.formId}
               type="radio"
-              value="중퇴"
+              value="박사졸업"
               onChange={(e) => setType(e.target.value)}
-              checked={type === "중퇴"}
+              checked={type === "박사졸업"}
             />{" "}
-            중퇴{" "}
+            박사졸업{" "}
           </label>
         </ContentsRadioStyle>
       </ContentsFormInputStyle>

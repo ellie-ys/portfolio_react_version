@@ -21,7 +21,9 @@ const Profile = (props) => {
   const [edit, setEdit] = useState(false);
   const [copyProfileData, setCopyProfileData] = useState(props.profileData);
   const [userName, setUserName] = useState(props.profileData.name);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(props.profileData.image);
+  const [newImage, setNewImage] = useState(null);
+
   const [description, setDescription] = useState(props.profileData.description);
   const [imageHash, setImageHash] = useState(Date.now());
 
@@ -42,6 +44,7 @@ const Profile = (props) => {
     props.setProfileData(copyProfileData);
     setEdit(false);
     setImage(null);
+    setNewImage(null);
   };
 
   const submitHandler = async (e) => {
@@ -113,10 +116,10 @@ const Profile = (props) => {
           <ProfileFormStyle>
             <ProfileFormInputStyle>
               <label for="file-input">
-                {image === null ? (
+                {newImage === null ? (
                   <img src={`${props.profileData.image}?${imageHash}`} />
                 ) : (
-                  <img src={URL.createObjectURL(image)} />
+                  <img src={URL.createObjectURL(newImage)} />
                 )}
               </label>
               <input
@@ -124,7 +127,10 @@ const Profile = (props) => {
                 id="file-input"
                 accept="image/*"
                 placeholder="이미지"
-                onChange={(e) => setImage(e.target.files[0])}
+                onChange={(e) => {
+                  setImage(e.target.files[0]);
+                  setNewImage(e.target.files[0]);
+                }}
               />
               <input
                 type="text"
@@ -162,14 +168,10 @@ const Profile = (props) => {
         </ProfileInnerStyle>
       ) : (
         <ProfileInnerStyle>
-          {props.profileData.image === null ? (
-            <img src="https://$$#$#.png" alt="프로필사진" />
-          ) : (
-            <img
-              src={`${props.profileData.image}?${imageHash}`}
-              alt="프로필사진"
-            />
-          )}
+          <img
+            src={`${props.profileData.image}?${imageHash}`}
+            alt="프로필사진"
+          />
           <p style={{ fontSize: "1.3rem", textAlign: "center" }}>
             {" "}
             {profileData.name}{" "}

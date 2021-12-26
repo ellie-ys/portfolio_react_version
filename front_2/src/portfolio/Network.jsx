@@ -136,10 +136,7 @@ const Network = () => {
               searchResult.map((element) => {
                 return (
                   <NetworkContentStyle key={element.id}>
-                    {element.image === null ? (
-                      <img src="###.png" width="100px" />
-                    ) : (
-                      <img src={`${element.image}?${imageHash}`} />)}
+                    <img src={`${element.image}?${imageHash}`} />
                     <div style={{ fontSize: "1.4rem" }}>{element.name}</div>
 
                     <div>{element.description}</div>
